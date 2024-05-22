@@ -8,6 +8,14 @@ export const theme = createTheme({
     secondary: {
       main: "#0968EE",
     },
+    background: {
+      default: "#EEEEEE", // Light Grey
+    },
+    info: {
+      light: "#ffffff",
+      main: "#A9A9A9",
+      dark: "#000000",
+    },
   },
   components: {
     MuiButton: {
