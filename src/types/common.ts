@@ -36,3 +36,6 @@ export type TAuthUser = {
   iat: number;
   exp: number;
 };
+
+export const PetSize = ["medium", "small", "large"];
+export const PetSpecies = ["car", "dog"];

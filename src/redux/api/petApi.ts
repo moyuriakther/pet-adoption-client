@@ -12,18 +12,34 @@ const petApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.pet],
     }),
     getAllPets: build.query({
-      query: (data) => ({
+      query: () => ({
         url: `/pets`,
         method: "GET",
-        data: data,
+      }),
+      providesTags: [tagTypes.pet],
+    }),
+    getPet: build.query({
+      query: (id) => ({
+        url: `/pets/${id}`,
+        method: "GET",
       }),
       providesTags: [tagTypes.pet],
     }),
     updatePet: build.mutation({
-      query: (data) => ({
-        url: `/pets/${data.id}`,
-        method: "PUT",
-        data: data.body,
+      query: ({ id, body }) => (
+        console.log(id, body),
+        {
+          url: `/pets/${id}`,
+          method: "PUT",
+          data: body,
+        }
+      ),
+      invalidatesTags: [tagTypes.pet],
+    }),
+    softDeletePet: build.mutation({
+      query: (id) => ({
+        url: `/pets/${id}/soft`,
+        method: "DELETE",
       }),
       invalidatesTags: [tagTypes.pet],
     }),
@@ -32,6 +48,8 @@ const petApi = baseApi.injectEndpoints({
 
 export const {
   useCreatePetMutation,
+  useGetPetQuery,
   useGetAllPetsQuery,
   useUpdatePetMutation,
+  useSoftDeletePetMutation,
 } = petApi;

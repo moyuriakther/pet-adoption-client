@@ -1,5 +1,14 @@
+import PetCardContainer from "@/components/Home/Cards/PetCardContainer";
+import HeroSection from "@/components/Home/HeroSection/HeroSection";
+
 const HomePage = () => {
-  return <> This is homess</>;
+  return (
+    <>
+      {" "}
+      <HeroSection />
+      <PetCardContainer />
+    </>
+  );
 };
 
 export default HomePage;

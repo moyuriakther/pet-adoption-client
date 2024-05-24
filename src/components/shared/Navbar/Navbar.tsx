@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import logo from "@/assets/images/logo3.png";
 import useUserInfo from "@/hooks/userInfo";
 import { logoutUser } from "@/services/actions/logoutUser";
+import { USER_ROLE } from "@/constants/userRoles";
 
 const Navbar = () => {
   const userInfo = useUserInfo();
@@ -32,15 +33,24 @@ const Navbar = () => {
             </Link>
           </Box>
           <Stack direction="row" justifyContent="space-between" gap={4}>
-            <Typography component={Link} href="/all-pets">
-              All Pets
+            <Typography component={Link} href="/">
+              Home
             </Typography>
-            <Typography>About Us</Typography>
-            {userInfo?.email ? (
+            <Typography component={Link} href="/about-us">
+              About Us
+            </Typography>
+
+            {userInfo?.role === USER_ROLE.ADMIN ? (
               <Typography component={Link} href="/dashboard" color="black">
                 Dashboard
               </Typography>
             ) : null}
+
+            {userInfo.email && (
+              <Typography component={Link} href="/my-profile">
+                My Profile
+              </Typography>
+            )}
           </Stack>
 
           {userInfo.email ? (

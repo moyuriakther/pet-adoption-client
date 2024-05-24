@@ -29,9 +29,14 @@ const FooterPage = () => {
           alignItems="center"
           py={3}
         >
-          <Typography color="#ffffff">
-            &copy; 2024 Pet Adoption. All Rights Reserved.
-          </Typography>
+          <Box>
+            <Typography color="#ffffff">
+              &copy; {new Date().getFullYear()} Pet Adoption.
+            </Typography>
+            <Typography color="#ffffff">All Rights Reserved.</Typography>
+            <Typography color="#ffffff">akthermoyuri@gmail.com</Typography>
+            <Typography color="#ffffff">01794844000</Typography>
+          </Box>
           <Typography
             variant="h5"
             component={Link}
@@ -46,9 +51,10 @@ const FooterPage = () => {
             Adoption
           </Typography>
 
-          <Typography color="#ffffff">
-            Privacy Policy! Terms & Conditions
-          </Typography>
+          <Box>
+            <Typography color="#ffffff">Privacy Policy!</Typography>
+            <Typography color="#ffffff">Terms & Conditions</Typography>
+          </Box>
         </Stack>
       </Container>
     </Box>

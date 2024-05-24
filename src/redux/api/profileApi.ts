@@ -11,6 +11,32 @@ const profileApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+    getAllUsers: build.query({
+      query: () => ({
+        url: `/users`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.user],
+    }),
+    updateUserStatus: build.mutation({
+      query: ({ id, body }) => (
+        console.log(body, IDBCursorWithValue),
+        {
+          url: `/users/status/${id}`,
+          method: "PUT",
+          data: body,
+        }
+      ),
+      invalidatesTags: [tagTypes.user],
+    }),
+    updateUserRole: build.mutation({
+      query: ({ id, body }) => ({
+        url: `/users/role/${id}`,
+        method: "PUT",
+        data: body,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
     updateMyProfile: build.mutation({
       query: (data) => ({
         url: `/profile`,
@@ -23,4 +49,10 @@ const profileApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetMyProfileQuery, useUpdateMyProfileMutation } = profileApi;
+export const {
+  useGetMyProfileQuery,
+  useUpdateMyProfileMutation,
+  useGetAllUsersQuery,
+  useUpdateUserRoleMutation,
+  useUpdateUserStatusMutation,
+} = profileApi;

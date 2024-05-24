@@ -7,6 +7,7 @@ export const theme = createTheme({
     },
     secondary: {
       main: "#0968EE",
+      dark: "red",
     },
     background: {
       default: "#EEEEEE", // Light Grey
