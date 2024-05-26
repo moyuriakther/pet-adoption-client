@@ -13,9 +13,11 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export const LoginValidationSchema = z.object({
-  email: z.string().email("Email is required"),
-  password: z.string().min(6, "Password must be 6 character"),
+export const loginValidationSchema = z.object({
+  email: z.string({ required_error: "Email is required" }),
+  password: z.string({
+    required_error: "Password is Required & must be 6 character",
+  }),
 });
 
 const LoginPage = () => {
@@ -85,7 +87,7 @@ const LoginPage = () => {
           <Box>
             <PAForm
               onSubmit={onSubmit}
-              resolver={zodResolver(LoginValidationSchema)}
+              resolver={zodResolver(loginValidationSchema)}
               defaultValues={{ email: "", password: "" }}
             >
               <Grid container spacing={2} my={1}>

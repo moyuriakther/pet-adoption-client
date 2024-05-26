@@ -4,10 +4,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import moment from "moment";
+import Link from "next/link";
 
 export default function MyAdoptedCard({ pet }: any) {
-  console.log(pet);
-  console.log(pet?.pet?.photos[0]);
+  // console.log(pet);
+  // console.log(pet?.pet?.photos[0]);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia
@@ -17,14 +19,16 @@ export default function MyAdoptedCard({ pet }: any) {
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {pet?.pet?.name}
+          Name: {pet?.pet?.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {pet?.updatedAt}
+          Adopted Date: {moment(pet?.updatedAt).format("DD-MM-YYYY")}
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Go Detail Page</Button>
+        <Link href={`/pet-details/${pet.petId}`} passHref>
+          <Button size="small">Go Detail Page</Button>
+        </Link>
       </CardActions>
     </Card>
   );
