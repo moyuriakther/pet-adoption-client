@@ -12,11 +12,12 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-// import PetCard from "./PetCard";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const PetCardContainer = () => {
   const { data, isLoading, isSuccess } = useGetAllPetsQuery({});
-  // console.log(data);
+
   return (
     <Box>
       <Box></Box>
@@ -43,7 +44,9 @@ const PetCardContainer = () => {
                         </Typography>
                       </CardContent>
                       <CardActions>
-                        <Button size="small">Details</Button>
+                        <Link href={`/pet-details/${pet.id}`} passHref>
+                          <Button size="small">Details</Button>
+                        </Link>
                       </CardActions>
                     </Card>
                   </Grid>

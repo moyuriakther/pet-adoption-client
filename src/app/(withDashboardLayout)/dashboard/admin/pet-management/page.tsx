@@ -1,5 +1,5 @@
 "use client";
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Button, Stack, Typography } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
@@ -75,7 +75,9 @@ const UserManagementPage = () => {
           Pets Management
         </Typography>
       </Stack>
-
+      <Link href={`/dashboard/admin/pet-management/add-pet`}>
+        <Button sx={{ my: 3 }}>Create New Pet</Button>
+      </Link>
       {isLoading ? (
         <Typography variant="h4" color="secondary.dark">
           Loading...

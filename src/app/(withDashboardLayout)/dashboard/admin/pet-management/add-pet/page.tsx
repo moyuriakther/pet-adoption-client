@@ -3,42 +3,45 @@
 import PAForm from "@/components/UI/Form/PAForm";
 import PAInput from "@/components/UI/Form/PAInput";
 import PASelect from "@/components/UI/Form/PASelect";
-import { useGetPetQuery, useUpdatePetMutation } from "@/redux/api/petApi";
+import { useCreatePetMutation } from "@/redux/api/petApi";
 import { PetSize, PetSpecies } from "@/types";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import { z } from "zod";
 
-const EditPetPage = ({ params }: any) => {
-  const petId = params?.petId;
+export const CreatePetValidationSchema = z.object({
+  name: z.string({ required_error: "Name is Required" }),
+  species: z.string({ required_error: "Species is Required" }),
+  breed: z.string({ required_error: "Breed is Required" }),
+  photos: z.string(),
+  age: z.string({ required_error: "Age is Required" }),
+  size: z.string({ required_error: "Pet Size is Required" }),
+  location: z.string({ required_error: "Location is Required" }),
+  description: z.string({ required_error: "Description is Required" }),
+  medicalHistory: z.string({ required_error: "Medical History is Required" }),
+  adoptionRequirements: z.string({
+    required_error: "Adoption Requirements is Required",
+  }),
+  temperament: z.string({ required_error: "Temperament is Required" }),
+});
+
+const AddNewPetPage = () => {
   const router = useRouter();
 
-  const { data, isLoading, isError, isSuccess } = useGetPetQuery(petId);
-  const [updatePet] = useUpdatePetMutation();
-  const defaultValues = {
-    name: data?.name || "",
-    species: data?.species || "",
-    breed: data?.breed || "",
-    photos: data?.photos[0] || "",
-    age: data?.age || 0,
-    size: data?.size || "",
-    location: data?.location || "",
-    description: data?.description || "",
-    temperament: data?.temperament || "",
-    medicalHistory: data?.medicalHistory || "",
-    adoptionRequirements: data?.adoptionRequirements || "",
-  };
+  const [createPet, { isLoading, isError }] = useCreatePetMutation();
 
   const handleSubmit = async (values: FieldValues) => {
     // values.id = id;
-    values.age = Number(values.age);
     console.log(values);
+    values.age = Number(values.age);
     values.photos = [values.photos];
     try {
-      const res = await updatePet({ id: petId, body: values }).unwrap();
+      const res = await createPet(values).unwrap();
       if (res?.id) {
-        toast.success("Pet Updated Successfully!!!");
+        toast.success("Pet Created Successfully!!!");
         router.push("/dashboard/admin/pet-management");
       }
     } catch (error: any) {
@@ -46,20 +49,25 @@ const EditPetPage = ({ params }: any) => {
       toast.error("Something is wrong....");
     }
   };
-
+  if (isError) {
+    toast.error(" Something is Wrong");
+  }
   return (
     <Box>
       <Typography
         sx={{ mb: 3, textAlign: "center", color: "primary.main" }}
-        variant="h6"
-        component="h6"
+        variant="h4"
+        component="h4"
       >
-        Update Pet Information
+        Create New Pet
       </Typography>
       {isLoading ? (
         "Loading..."
       ) : (
-        <PAForm onSubmit={handleSubmit} defaultValues={defaultValues}>
+        <PAForm
+          onSubmit={handleSubmit}
+          resolver={zodResolver(CreatePetValidationSchema)}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={4}>
               <PAInput
@@ -177,7 +185,7 @@ const EditPetPage = ({ params }: any) => {
             </Grid>
           </Grid>
           <Button sx={{ mt: 1 }} type="submit">
-            Update
+            Create
           </Button>
         </PAForm>
       )}
@@ -185,4 +193,4 @@ const EditPetPage = ({ params }: any) => {
   );
 };
 
-export default EditPetPage;
+export default AddNewPetPage;

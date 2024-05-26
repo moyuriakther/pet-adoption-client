@@ -9,9 +9,22 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Sidebar from "../Sidebar/Sidebar";
-import { Avatar, Badge, Menu, MenuItem, Stack, Tooltip } from "@mui/material";
+import {
+  Avatar,
+  Badge,
+  Button,
+  Menu,
+  MenuItem,
+  Stack,
+  Tooltip,
+} from "@mui/material";
 import Profile from "@/assets/profile.jpg";
 import NotificationsIcon from "@mui/icons-material/Notifications";
+import { useGetMyProfileQuery } from "@/redux/api/profileApi";
+import useUserInfo from "@/hooks/userInfo";
+import { logoutUser } from "@/services/actions/logoutUser";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const drawerWidth = 240;
 
@@ -22,7 +35,14 @@ export default function DashboardDrawer({
 }) {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
-  //   const { data, isLoading } = useGetMyProfileQuery({});
+  const { data, isLoading } = useGetMyProfileQuery({});
+  // console.log(data);
+
+  const userInfo = useUserInfo();
+  const router = useRouter();
+  const handleLogOut = () => {
+    logoutUser(router);
+  };
 
   const handleDrawerClose = () => {
     setIsClosing(true);
@@ -80,8 +100,8 @@ export default function DashboardDrawer({
           >
             <Box>
               <Typography variant="body2" noWrap component="div" color="gray">
-                Hi,
-                {/* {isLoading ? "Loading.." : data?.name} */}
+                Hey,
+                {isLoading ? "Loading.." : data?.name}
               </Typography>
               <Typography
                 variant="h6"
@@ -92,14 +112,22 @@ export default function DashboardDrawer({
                 Welcome to dashboard
               </Typography>
             </Box>
-            <Stack gap={3} direction="row">
-              <Badge badgeContent={1} color="primary">
-                <IconButton sx={{ background: "#ffffff" }}>
-                  <NotificationsIcon color="action" />
-                </IconButton>
-              </Badge>
-              {/* <Avatar alt={data?.name} src={data?.profilePhoto} /> */}
-              {/* <AccountMenu /> */}
+            <Stack direction="row" gap={2}>
+              {" "}
+              <Link href="/">
+                <Button>Back To Home</Button>
+              </Link>
+              {userInfo?.email && (
+                <Button
+                  onClick={handleLogOut}
+                  sx={{
+                    backgroundColor: "primary.main",
+                    color: "info.dark",
+                  }}
+                >
+                  Sign Out
+                </Button>
+              )}
             </Stack>
           </Box>
         </Toolbar>

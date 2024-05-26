@@ -1,4 +1,6 @@
 import { authKey } from "@/constants/authKey";
+import { setAccessToken } from "@/services/actions/setAccessToken";
+import { getNewAccessToken } from "@/services/authServices";
 import { TResponseError, TResponseSuccess } from "@/types/common";
 import { getFromLocalStorage, setToLocalStorage } from "@/utils/local-storage";
 import axios from "axios";
@@ -16,6 +18,7 @@ instance.interceptors.request.use(
     if (accessToken) {
       config.headers.Authorization = accessToken;
     }
+    // console.log({ config });
     return config;
   },
   function (error) {
@@ -28,6 +31,7 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   // @ts-ignore
   function (response) {
+    // console.log(response);
     const responseObject: TResponseSuccess = {
       data: response?.data?.data,
       meta: response?.data?.meta,
@@ -35,16 +39,16 @@ instance.interceptors.response.use(
     return responseObject;
   },
   async function (error) {
-    console.log(error);
+    // console.log(error);
     const config = error?.config;
     if (error?.response?.status === 500 && !config.sent) {
       config.sent = true;
-      //   const response = await getNewAccessToken();
-      // console.log(response.data.accessToken);
-      //   const accessToken = response.data.accessToken;
-      //   config.headers["Authorization"] = accessToken;
-      //   setToLocalStorage(authKey, accessToken);
-      //   setAccessToken(authKey);
+      const response = await getNewAccessToken();
+      console.log(response.data.accessToken);
+      const accessToken = response.data.accessToken;
+      config.headers["Authorization"] = accessToken;
+      setToLocalStorage(authKey, accessToken);
+      setAccessToken(authKey);
       return instance(config);
     } else {
       const responseObject: TResponseError = {

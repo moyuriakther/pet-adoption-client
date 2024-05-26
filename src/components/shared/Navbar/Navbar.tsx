@@ -7,6 +7,7 @@ import logo from "@/assets/images/logo3.png";
 import useUserInfo from "@/hooks/userInfo";
 import { logoutUser } from "@/services/actions/logoutUser";
 import { USER_ROLE } from "@/constants/userRoles";
+import AccountMenu from "@/app/(withCommonLayout)/my-profile/Component/AccountMenu";
 
 const Navbar = () => {
   const userInfo = useUserInfo();
@@ -32,7 +33,12 @@ const Navbar = () => {
               <Image src={logo} alt="logo" height={70} width={70} />
             </Link>
           </Box>
-          <Stack direction="row" justifyContent="space-between" gap={4}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            gap={4}
+          >
             <Typography component={Link} href="/">
               Home
             </Typography>
@@ -46,11 +52,7 @@ const Navbar = () => {
               </Typography>
             ) : null}
 
-            {userInfo.email && (
-              <Typography component={Link} href="/my-profile">
-                My Profile
-              </Typography>
-            )}
+            {userInfo.email && <AccountMenu />}
           </Stack>
 
           {userInfo.email ? (

@@ -15,7 +15,13 @@ const adoptionApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: `/adoption-requests`,
         method: "GET",
-        data: data,
+      }),
+      providesTags: [tagTypes.adoption],
+    }),
+    myAdoptedPets: build.query({
+      query: (data) => ({
+        url: `/adoption-requests/my-pets`,
+        method: "GET",
       }),
       providesTags: [tagTypes.adoption],
     }),
@@ -34,4 +40,5 @@ export const {
   useCreateAdoptionRequestMutation,
   useGetAllAdoptionRequestQuery,
   useUpdateAdoptionRequestMutation,
+  useMyAdoptedPetsQuery,
 } = adoptionApi;

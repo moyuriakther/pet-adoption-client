@@ -38,4 +38,4 @@ export type TAuthUser = {
 };
 
 export const PetSize = ["medium", "small", "large"];
-export const PetSpecies = ["car", "dog"];
+export const PetSpecies = ["cat", "dog"];
