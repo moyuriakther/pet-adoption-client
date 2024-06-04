@@ -7,13 +7,13 @@ import {
 } from "react-hook-form";
 
 type TFormConfig = {
-  resolver?: any;
   defaultValues?: Record<string, any>;
+  resolver?: any;
 };
 
 type TFormProps = {
-  children: ReactNode;
   onSubmit: SubmitHandler<FieldValues>;
+  children: ReactNode;
 } & TFormConfig;
 
 const PAForm = ({

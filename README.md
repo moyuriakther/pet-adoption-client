@@ -4,69 +4,54 @@ Welcome to the Pet Adoption website project! This platform is designed to facili
 
 ## Live URL
 
+### https://pet-adoption-client-three.vercel.app
+
 [Insert your live URL here]
+
+## Login Credentials:
+
+- Admin:
+  email: admin@gmail.com
+  password: admin111
+- User-1 :
+  email: shemol@gmail.com
+  password: user12345
+- User-2 :
+  email: mousen@gamil.com
+  password: user12345
 
 ## Project Features
 
 ### 1. Home Page/Landing Page
 
-#### Header
+- Navigation :
 
-- **Logo**: Prominently displayed website logo.
-- **Navigation Bar**: Links to:
   - Home
   - About Us
   - Login/Register (if not logged in)
   - My Profile (if logged in)
+  - Hover on My Profile show Profile and change password
+  - If user Admin Show Dashboard
 
-#### Searching Options
-
-- **Search Bar**: Allows users to search for pets by:
-  - Pet type (e.g., dog, cat)
-  - Breed
-  - Age
-  - Location
-- **Sidebar**: Additional filtering options such as:
-  - Size
-  - Gender
-  - Special needs
-
-#### Pet Lists (Based on search)
-
-- **Pet Cards**: Display a list of pets available for adoption in card format. Each card includes:
-  - Pet's name
-  - Photo
-  - Brief description
-  - Age
-  - Breed
-  - Location
-  - Link to the full pet details page
-
-#### Extra Sections (Optional)
-
-- **Success Stories**: Testimonials from people who have adopted pets through the website.
-- **Adoption Tips**: Advice and guidelines for adopting a pet.
-
-#### Footer
-
-- **Contact Information**: Email address, phone number, social media links.
-- **Copyright Information**: Standard copyright details.
-- **Additional Links**: Terms of Use, Privacy Policy, etc.
+- **Home** :-
+- Pet Cards: Display a list of pets available for adoption in card format. Each card includes: Pet's name, Photo, Brief description, and Link to the full pet details page
+- if user not sign in user cant see details pet page
+- user can search pet by name, species, breed and location
+- in details page user can see pets details information and make a request for adoption
 
 ### 2. Login & Registration
 
-#### Login Form
+#### Login:
 
-- **Fields**:
-  - Username or email address
-  - Password
+- email address
+- Password
 
 #### Registration Form
 
-- **Fields**:
-  - Username
-  - Email address
-  - Password (with confirmation)
+- Username
+- name
+- Email address
+- Password (with confirmation)
 
 ### 3. Pet Details Page (Private)
 
@@ -91,48 +76,26 @@ Welcome to the Pet Adoption website project! This platform is designed to facili
 
 #### User Account Information
 
-- **Edit Profile**: Options to edit username and email.
-- **Change Password**: Link to Change Password section.
-
-#### Subsections
+- show user account information with image
+- user can update profile information
 
 - **5.1 My Adopted Pets**:
-  - List of pets the user has adopted.
-  - Details for each pet:
-    - Pet's name
-    - Photo
-    - Adoption date
-    - Link to the pet details page (if available)
-- **5.2 Change Password Section**:
-  - **Fields**:
-    - Current password
-    - New password (with confirmation)
+- if user role is user, user can see his/her adopted pets in his/her profile
+- if user role is admin, admin can see adoption requests make by users
+
+- **Change Password**:
+- user can change password with current password and new password
 
 ### 6. Admin Dashboard
 
-#### User Management
-
-- **View and Manage User Accounts**: Activate/deactivate accounts, edit roles.
-
-#### Pet Management
-
-- **Add New Pets**: Only admins can add pets to the system.
-  - **Form Fields**:
-    - Pet's name
-    - Photos
-    - Detailed description
-    - Age, breed, gender
-    - Health status
-    - Current location
-- **Edit/Remove Pets**: Admins can edit or remove pet listings.
-
-### 7. About Us Page
-
-#### Content
-
-- **Mission Statement**: Brief description of the website's purpose and mission.
-- **Team Information**: Information about the team behind the website.
-- **Contact Information**: Email address, phone number, social media links.
+- Admin Can access admin dashboard
+- Admin Can Manage User
+- Admin can make user status activate or deactivate
+- Admin can make user to admin or admin to normal user
+- Admin Can create new pet
+- Admin can delete pet
+- Admin can update pet information
+- Admin can access pet adoption requests to his/her profile and accept them or Reject them
 
 ## Technology Stack
 
@@ -152,8 +115,7 @@ Welcome to the Pet Adoption website project! This platform is designed to facili
 
 ### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone [repository-url]
-   cd [repository-name]
-   ```
+1. Clone the repository: git clone https://github.com/moyuriakther/pet-adoption-client.git
+2. Go to the Project file: cd pet-adoption-client
+3. Install Dependency: npm install
+4. Run Project Locally: npm run dev

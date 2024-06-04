@@ -10,27 +10,11 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
+// import { ZodEffects, ZodObject, ZodString, ZodTypeAny, z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useChangePasswordMutation } from "@/redux/api/authApi";
 import { logoutUser } from "@/services/actions/logoutUser";
-
-export const ChangePasswordValidationSchema = z
-  .object({
-    oldPassword: z
-      .string()
-      .min(6, "Old password must be at least 6 characters"),
-    newPassword: z
-      .string()
-      .min(6, "New password must be at least 6 characters"),
-    confirmNewPassword: z
-      .string()
-      .min(6, "Confirm new password must be at least 6 characters"),
-  })
-  .refine((data) => data.newPassword === data.confirmNewPassword, {
-    message: "Passwords don't match",
-    path: ["confirmNewPassword"],
-  });
+import { ChangePasswordValidationSchema } from "@/zodValidations/zodValidations";
 
 const ChangePassword = () => {
   const [changePassword] = useChangePasswordMutation();
@@ -98,7 +82,7 @@ const ChangePassword = () => {
           <Box>
             <PAForm
               onSubmit={onSubmit}
-              resolver={zodResolver(ChangePasswordValidationSchema)}
+              resolver={zodResolver(ChangePasswordValidationSchema as any)}
               defaultValues={{
                 oldPassword: "",
                 newPassword: "",

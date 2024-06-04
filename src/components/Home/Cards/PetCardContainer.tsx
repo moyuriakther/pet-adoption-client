@@ -12,7 +12,12 @@ import {
   CardContent,
   CardMedia,
   Container,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  SelectChangeEvent,
   Stack,
   Typography,
 } from "@mui/material";
@@ -23,6 +28,8 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const PetCardContainer = () => {
   const [searchParams, setSearchParams] = useState<Record<string, any>>({});
+  const [size, setSize] = useState("");
+  const [gender, setGender] = useState("");
 
   const { data, isLoading, isSuccess } = useGetAllPetsQuery({
     ...Object.fromEntries(
@@ -37,7 +44,18 @@ const PetCardContainer = () => {
       breed: breed || "",
       age: age || "",
       location: location || "",
+      size: size || "",
+      gender: gender || "",
     });
+  };
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setSize(event.target.value);
+    // setSearchParams({ size: size || "" });
+  };
+  const handleGenderChange = (event: SelectChangeEvent) => {
+    setGender(event.target.value);
+    console.log(gender);
   };
 
   return (
@@ -86,39 +104,96 @@ const PetCardContainer = () => {
           </PAForm>
         </Box>
       </Container>
-      <Stack>
-        <Box></Box>
-        <Container sx={{ textAlign: "center", margin: "30px auto" }}>
-          <Grid container spacing={2} mb={4}>
-            {isLoading
-              ? "Loading.."
-              : data?.map((pet: any) => (
-                  <Grid item xs={6} md={4} key={pet.id}>
-                    <Card sx={{ maxWidth: 345, padding: 2 }}>
-                      <CardMedia
-                        sx={{ height: 140, borderRadius: 5 }}
-                        image={pet?.photos[0]}
-                        title={pet?.title}
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="h5" component="div">
-                          {pet?.name}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                          {pet?.description}
-                        </Typography>
-                      </CardContent>
-                      <CardActions>
-                        <Link href={`/pet-details/${pet.id}`} passHref>
-                          <Button size="small">Details</Button>
-                        </Link>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
-          </Grid>
-        </Container>
-      </Stack>
+      <Grid container spacing={2}>
+        <Grid item xs={2} md={2}>
+          <FormControl
+            sx={{
+              m: 1,
+              p: 1,
+              borderRadius: 3,
+              backgroundColor: "background.default",
+            }}
+            fullWidth={true}
+          >
+            <InputLabel id="demo-customized-select-label">Size</InputLabel>
+            <Select
+              labelId="demo-customized-select-label"
+              id="demo-customized-select"
+              value={size}
+              onChange={handleChange}
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value="">none</MenuItem>
+              <MenuItem value={"small"}>small</MenuItem>
+              <MenuItem value={"medium"}>medium</MenuItem>
+              <MenuItem value={"large"}>large</MenuItem>
+            </Select>
+          </FormControl>
+          <FormControl
+            sx={{
+              m: 1,
+              p: 1,
+              borderRadius: 3,
+              backgroundColor: "background.default",
+            }}
+            fullWidth={true}
+          >
+            <InputLabel id="demo-customized-select-gender">Gender</InputLabel>
+            <Select
+              labelId="demo-customized-select-gender"
+              id="demo-customized-select"
+              value={gender}
+              onChange={handleGenderChange}
+              inputProps={{ "aria-label": "Without label" }}
+            >
+              <MenuItem value="">none</MenuItem>
+              <MenuItem value={"male"}>male</MenuItem>
+              <MenuItem value={"female"}>female</MenuItem>
+            </Select>
+          </FormControl>
+        </Grid>
+        <Grid item xs={10} md={10}>
+          <Box sx={{ textAlign: "center", margin: "30px auto" }}>
+            <Grid container spacing={2} mb={4}>
+              {isLoading
+                ? "Loading.."
+                : data?.map((pet: any) => (
+                    <Grid item xs={6} md={4} key={pet.id}>
+                      <Card sx={{ maxWidth: 345, padding: 2 }}>
+                        <CardMedia
+                          sx={{ height: 140, borderRadius: 5 }}
+                          image={pet?.photos[0]}
+                          title={pet?.title}
+                        />
+                        <CardContent sx={{ textAlign: "start" }}>
+                          <Typography gutterBottom variant="h5" component="div">
+                            Name: {pet?.name}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            Age: {pet?.age}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            Breed: {pet?.breed}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            Location: {pet?.location}
+                          </Typography>
+                          <Typography variant="body2" color="text.secondary">
+                            Description: {pet?.description}
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Link href={`/pet-details/${pet.id}`} passHref>
+                            <Button size="small">Details</Button>
+                          </Link>
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                  ))}
+            </Grid>
+          </Box>
+        </Grid>
+      </Grid>
     </Box>
   );
 };

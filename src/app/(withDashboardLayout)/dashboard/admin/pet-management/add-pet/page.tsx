@@ -4,29 +4,13 @@ import PAForm from "@/components/UI/Form/PAForm";
 import PAInput from "@/components/UI/Form/PAInput";
 import PASelect from "@/components/UI/Form/PASelect";
 import { useCreatePetMutation } from "@/redux/api/petApi";
-import { PetSize, PetSpecies } from "@/types";
+import { PetGender, PetSize, PetSpecies } from "@/types";
+import { CreatePetValidationSchema } from "@/zodValidations/zodValidations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Grid, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
-
-export const CreatePetValidationSchema = z.object({
-  name: z.string({ required_error: "Name is Required" }),
-  species: z.string({ required_error: "Species is Required" }),
-  breed: z.string({ required_error: "Breed is Required" }),
-  photos: z.string(),
-  age: z.string({ required_error: "Age is Required" }),
-  size: z.string({ required_error: "Pet Size is Required" }),
-  location: z.string({ required_error: "Location is Required" }),
-  description: z.string({ required_error: "Description is Required" }),
-  medicalHistory: z.string({ required_error: "Medical History is Required" }),
-  adoptionRequirements: z.string({
-    required_error: "Adoption Requirements is Required",
-  }),
-  temperament: z.string({ required_error: "Temperament is Required" }),
-});
 
 const AddNewPetPage = () => {
   const router = useRouter();
@@ -35,8 +19,9 @@ const AddNewPetPage = () => {
 
   const handleSubmit = async (values: FieldValues) => {
     // values.id = id;
-    console.log(values);
-    values.age = Number(values.age);
+    // console.log(values);
+    values.age = Math.round(values.age);
+    // console.log(values);
     values.photos = [values.photos];
     try {
       const res = await createPet(values).unwrap();
@@ -66,7 +51,7 @@ const AddNewPetPage = () => {
       ) : (
         <PAForm
           onSubmit={handleSubmit}
-          resolver={zodResolver(CreatePetValidationSchema)}
+          resolver={zodResolver(CreatePetValidationSchema as any)}
         >
           <Grid container spacing={2}>
             <Grid item xs={12} sm={12} md={4}>
@@ -109,14 +94,14 @@ const AddNewPetPage = () => {
                 sx={{ mb: 2 }}
               />
             </Grid>
-            {/* <Grid item xs={12} sm={12} md={4}>
+            <Grid item xs={12} sm={12} md={4}>
               <PASelect
-                name="photos"
-                label="Photos"
-                items={data?.photos}
+                name="gender"
+                label="Gender"
+                items={PetGender}
                 sx={{ mb: 2 }}
               />
-            </Grid> */}
+            </Grid>
             <Grid item xs={12} sm={12} md={4}>
               <PAInput
                 type="text"

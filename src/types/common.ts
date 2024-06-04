@@ -39,3 +39,4 @@ export type TAuthUser = {
 
 export const PetSize = ["medium", "small", "large"];
 export const PetSpecies = ["cat", "dog"];
+export const PetGender = ["male", "female"];

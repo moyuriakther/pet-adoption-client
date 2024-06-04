@@ -4,21 +4,14 @@ import PAInput from "@/components/UI/Form/PAInput";
 import { userLogin } from "@/services/actions/loginUser";
 import { registerUser } from "@/services/actions/registerUser";
 import { storeUserInfo } from "@/services/authServices";
+import { registerValidationSchema } from "@/zodValidations/zodValidations";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
-
-export const registerValidationSchema = z.object({
-  name: z.string().min(1, "Please enter your name!"),
-  username: z.string().min(1, "Please enter your username!"),
-  email: z.string().email("Please enter a valid email address!"),
-  password: z.string().min(6, "Please enter your password!"),
-});
 
 const RegistrationPage = () => {
   const router = useRouter();
@@ -72,25 +65,11 @@ const RegistrationPage = () => {
               </Typography>
             </Box>
           </Stack>
-          {/* {error && (
-                <Box>
-                  <Typography
-                    sx={{
-                      backgroundColor: "red",
-                      padding: "1px",
-                      borderRadius: "2px",
-                      color: "white",
-                      marginTop: "5px",
-                    }}
-                  >
-                    {error}
-                  </Typography>
-                </Box>
-              )} */}
+
           <Box>
             <PAForm
               onSubmit={onSubmit}
-              resolver={zodResolver(registerValidationSchema)}
+              resolver={zodResolver(registerValidationSchema as any)}
               defaultValues={{
                 email: "",
                 password: "",
@@ -132,11 +111,6 @@ const RegistrationPage = () => {
                   />
                 </Grid>
               </Grid>
-              {/* <Box sx={{ textAlign: "end" }}>
-                    <Typography component="p" mb={1} fontWeight={300}>
-                      Forgot Password?
-                    </Typography>
-                  </Box> */}
               <Button
                 fullWidth={true}
                 sx={{ margin: "10px 0px" }}

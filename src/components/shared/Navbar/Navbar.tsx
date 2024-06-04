@@ -47,7 +47,11 @@ const Navbar = () => {
             </Typography>
 
             {userInfo?.role === USER_ROLE.ADMIN ? (
-              <Typography component={Link} href="/dashboard" color="black">
+              <Typography
+                component={Link}
+                href="/dashboard/admin"
+                color="black"
+              >
                 Dashboard
               </Typography>
             ) : null}

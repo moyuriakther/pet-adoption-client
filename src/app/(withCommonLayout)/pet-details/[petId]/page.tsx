@@ -90,6 +90,9 @@ const PetDetailsPage = () => {
               <Typography variant="h6" color="text.secondary">
                 Temperament: {data?.temperament}
               </Typography>
+              <Typography variant="h6" color="text.secondary">
+                Gender: {data?.gender}
+              </Typography>
               <Typography variant="body1" color="text.secondary">
                 Description: {data?.description}
               </Typography>

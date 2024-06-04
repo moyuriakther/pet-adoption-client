@@ -12,14 +12,13 @@ const petApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.pet],
     }),
     getAllPets: build.query({
-      query: (args: Record<string, any>) => (
-        console.log(args, "args"),
-        {
+      query: (args: Record<string, any>) =>
+        // console.log(args, "args"),
+        ({
           url: `/pets`,
           method: "GET",
           params: args,
-        }
-      ),
+        }),
       providesTags: [tagTypes.pet],
     }),
     getPet: build.query({

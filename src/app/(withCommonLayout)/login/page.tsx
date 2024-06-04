@@ -12,13 +12,7 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-export const loginValidationSchema = z.object({
-  email: z.string({ required_error: "Email is required" }),
-  password: z.string({
-    required_error: "Password is Required & must be 6 character",
-  }),
-});
+import { loginValidationSchema } from "@/zodValidations/zodValidations";
 
 const LoginPage = () => {
   const router = useRouter();
@@ -87,7 +81,7 @@ const LoginPage = () => {
           <Box>
             <PAForm
               onSubmit={onSubmit}
-              resolver={zodResolver(loginValidationSchema)}
+              resolver={zodResolver(loginValidationSchema as any)}
               defaultValues={{ email: "", password: "" }}
             >
               <Grid container spacing={2} my={1}>
