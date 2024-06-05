@@ -1,10 +1,20 @@
 import AboutUsHeroSection from "@/components/AboutUs/AboutUsHero";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Stack,
+  Typography,
+  // useMediaQuery,
+  // useTheme,
+} from "@mui/material";
 import Banner from "@/assets/images/bann2.jpg";
 import Image from "next/image";
 import AboutUsBreadcrumb from "@/components/AboutUs/AboutUsBreadcrumb";
 
 const AboutUsPage = () => {
+  // const theme = useTheme();
+  // const isMobileOrTablet = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Container>
       <Box sx={{ mt: 2 }}>

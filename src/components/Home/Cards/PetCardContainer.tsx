@@ -20,6 +20,8 @@ import {
   SelectChangeEvent,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -27,6 +29,9 @@ import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 
 const PetCardContainer = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobileOrTablet = useMediaQuery(theme.breakpoints.down("md"));
   const [searchParams, setSearchParams] = useState<Record<string, any>>({});
   const [size, setSize] = useState("");
   const [gender, setGender] = useState("");
@@ -69,6 +74,7 @@ const PetCardContainer = () => {
             justifyContent: "center",
             alignItems: "center",
             backgroundColor: "background.default",
+            flexDirection: isMobile ? "column" : "row",
           }}
         >
           <PAForm onSubmit={onSubmit}>
@@ -104,7 +110,16 @@ const PetCardContainer = () => {
           </PAForm>
         </Box>
       </Container>
-      <Grid container spacing={2}>
+      <Grid
+        container
+        spacing={2}
+        mt={2}
+        sx={{
+          flexDirection: isMobileOrTablet ? "column" : "row",
+          justifyContent: isMobileOrTablet ? "center" : "",
+          alignItems: isMobileOrTablet ? "center" : "",
+        }}
+      >
         <Grid item xs={2} md={2}>
           <FormControl
             sx={{
@@ -122,6 +137,7 @@ const PetCardContainer = () => {
               value={size}
               onChange={handleChange}
               inputProps={{ "aria-label": "Without label" }}
+              fullWidth={true}
             >
               <MenuItem value="">none</MenuItem>
               <MenuItem value={"small"}>small</MenuItem>
@@ -140,6 +156,7 @@ const PetCardContainer = () => {
           >
             <InputLabel id="demo-customized-select-gender">Gender</InputLabel>
             <Select
+              fullWidth={true}
               labelId="demo-customized-select-gender"
               id="demo-customized-select"
               value={gender}
@@ -158,7 +175,7 @@ const PetCardContainer = () => {
               {isLoading
                 ? "Loading.."
                 : data?.map((pet: any) => (
-                    <Grid item xs={6} md={4} key={pet.id}>
+                    <Grid item xs={12} sm={6} md={4} key={pet.id}>
                       <Card sx={{ maxWidth: 345, padding: 2 }}>
                         <CardMedia
                           sx={{ height: 140, borderRadius: 5 }}

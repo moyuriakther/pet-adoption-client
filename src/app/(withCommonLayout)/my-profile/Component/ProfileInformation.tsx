@@ -13,6 +13,8 @@ import {
   Stack,
   styled,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import MyAdoptedCard from "./MyAdoptedCard";
 import useUserInfo from "@/hooks/userInfo";
@@ -35,6 +37,8 @@ const StyledInformationBox = styled(Box)(({ theme }) => ({
 const ProfileInformation = ({ data, isLoading }: any) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const userInfo = useUserInfo();
 
   const { data: myAdoptedPets } = useMyAdoptedPetsQuery(undefined);
@@ -180,7 +184,7 @@ const ProfileInformation = ({ data, isLoading }: any) => {
             <Grid container spacing={2} mb={4}>
               {myAdoptedPets?.length > 0 &&
                 myAdoptedPets?.map((pet: any) => (
-                  <Grid item xs={6} md={6} key={pet?.id}>
+                  <Grid item xs={12} sm={6} md={4} key={pet?.id}>
                     <MyAdoptedCard key={pet?.id} pet={pet} />
                   </Grid>
                 ))}
@@ -193,7 +197,7 @@ const ProfileInformation = ({ data, isLoading }: any) => {
             Pet Adoption Requests
           </Typography>
           {!adoptionRequestLoading ? (
-            <Box my={2}>
+            <Box my={2} sx={{ height: isMobile ? 400 : 600, width: "100%" }}>
               <DataGrid
                 rows={allAdoptionRequests || []}
                 columns={columns}
