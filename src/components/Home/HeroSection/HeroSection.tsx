@@ -11,21 +11,22 @@ import {
 } from "@mui/material";
 import Image from "next/image";
 import HeaderBanner from "@/assets/images/banner.png";
+import Banner from "@/assets/images/banner2.jpg"
 
 const HeroSection = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
   return (
-    <Box sx={{ bgcolor: "background.paper", py: 8 }}>
+    <Box sx={{ bgcolor: "background.paper", py: 8,  backgroundImage: `url(${Banner})`,backgroundSize: "cover",backgroundPosition: "center",backgroundRepeat: "no-repeat", }}>
       <Container maxWidth="lg">
         <Grid container spacing={2} alignItems="center" justifyContent="center">
           <Grid item xs={12} md={6}>
             <Stack direction="column" spacing={2}>
               <Typography
-                variant={isMobile ? "h4" : isTablet ? "h3" : "h2"}
-                component="h1"
-                fontWeight={600}
+                variant={isMobile ? "h5" : isTablet ? "h4" : "h3"}
+                component="h3"
+                fontWeight={500}
               >
                 {isMobile ? "Adopt a Shelter" : "Adopt a shelter cat or dog"}
               </Typography>
@@ -70,7 +71,7 @@ const HeroSection = () => {
           </Grid>
           <Grid item xs={12} md={6}>
             <Box sx={{ width: "100%", height: "auto", position: "relative" }}>
-              <Image src={HeaderBanner} alt="banner" layout="responsive" />
+              <Image src={HeaderBanner} alt="banner" layout="responsive" style={{ borderRadius: "5%" }}/>
             </Box>
           </Grid>
         </Grid>

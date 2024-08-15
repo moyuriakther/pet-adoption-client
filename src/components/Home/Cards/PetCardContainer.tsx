@@ -64,8 +64,20 @@ const PetCardContainer = () => {
   };
 
   return (
-    <Box>
+    <Box sx={{mt:8}}>
       <Container>
+        <Stack direction="column" spacing={2} mb={4}>
+            <Typography textAlign="center" variant="h6"
+                        component="p"
+                        fontWeight={300} 
+                        >- Available Pets
+            </Typography>
+            <Typography textAlign="center" variant="h4"
+                        component="h2"
+                        fontWeight={600} 
+                        color={"primary.main"}>Featured Pets
+            </Typography>
+          </Stack>
         <Box
           sx={{
             display: "flex",
