@@ -82,7 +82,7 @@ const LoginPage = () => {
             <PAForm
               onSubmit={onSubmit}
               resolver={zodResolver(loginValidationSchema as any)}
-              defaultValues={{ email: "", password: "" }}
+              defaultValues={{ email: "admin@gmail.com", password: "admin111" }}
             >
               <Grid container spacing={2} my={1}>
                 <Grid item md={12} xs={12}>

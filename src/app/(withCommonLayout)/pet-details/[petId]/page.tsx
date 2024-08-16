@@ -15,6 +15,8 @@ import {
 import { useParams, useRouter } from "next/navigation";
 import AdoptionRequestModal from "./component/AdoptionRequestModal";
 import { useState } from "react";
+import Link from "next/link";
+import ReviewPage from "./component/Review";
 
 const PetDetailsPage = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -27,9 +29,20 @@ const PetDetailsPage = () => {
   if (!user?.email) {
     // router.push("/login");
     return (
-      <Box sx={{ justifyContent: "center", alignItems: "center" }}>
+      <Box sx={{ justifyContent: "center", alignItems: "center", py:4 }}>
         <Typography variant="h4" color="secondary.dark">
-          You are Unauthorized to access
+          You are Unauthorized to access ! please 
+          <Button
+              component={Link}
+              href="/login"
+              sx={{
+                ml: 2,
+                backgroundColor: "primary.main",
+                color: "info.dark",
+              }}
+            >
+              Login
+            </Button>
         </Typography>
       </Box>
     );
@@ -114,6 +127,7 @@ const PetDetailsPage = () => {
           </Card>
         </Grid>
       </Grid>
+      {/* <ReviewPage petId={id} /> */}
     </Container>
   );
 };

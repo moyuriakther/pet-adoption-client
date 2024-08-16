@@ -1,4 +1,5 @@
-import { Box, Container, Grid, Stack, Typography } from "@mui/material";
+"use client"
+import { Box, Container, Grid, Stack, Typography, useMediaQuery, useTheme } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import facebook from "@/assets/landing_page/facebook.png";
@@ -7,6 +8,10 @@ import linkedin from "@/assets/landing_page/linkedin.png";
 import twitter from "@/assets/landing_page/twitter.png";
 
 const FooterPage = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isTablet = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Box bgcolor="rgba(238, 146, 9, 1)" py={5}>
       <Container maxWidth="lg">
@@ -19,8 +24,8 @@ const FooterPage = () => {
           <Grid item xs={12} md={4}>
           <Stack
               direction={{ xs: "column", md: "row" }}
-              justifyContent="start"
-              alignItems="center"
+              alignItems={{ xs: "center", md: "flex-start" }}
+              textAlign={{ xs: "center", md: "left" }}
               spacing={4}
             >
               <Box letterSpacing={4}>
@@ -37,16 +42,16 @@ const FooterPage = () => {
                   </Box>
                   Adoption
                 </Typography>
-                <Typography color="#ffffff">Find your perfect pet companion. Our platform connects you with local shelters and rescues for easy, secure pet adoption.</Typography>
+                <Typography color="lightGray">Find your perfect pet companion. Our platform connects you with local shelters and rescues for easy, secure pet adoption.</Typography>
               </Box>
             </Stack>
           </Grid>
           <Grid item xs={12} md={4}>
             <Stack
               direction={{ xs: "column", md: "row" }}
-              justifyContent="space-between"
-              alignItems="center"
-              pl={12}
+              alignItems={{ xs: "center", md: "flex-start" }}
+              textAlign={{ xs: "center", md: "left" }}
+              pl={!isMobile && !isTablet ? 12 : 0} 
               spacing={2}
             >
               <Box>
@@ -58,14 +63,13 @@ const FooterPage = () => {
                   <Typography color="#ffffff" component={Link} href="/about-us">About Us</Typography>
                 </Stack>
               </Box>
-            
             </Stack>
           </Grid>
           <Grid item xs={12} md={4}>
           <Stack
               direction={{ xs: "column", md: "row" }}
-              justifyContent="start"
-              alignItems="center"
+              alignItems={{ xs: "center", md: "flex-start" }}
+              textAlign={{ xs: "center", md: "left" }}
               spacing={4}
             >
               <Box letterSpacing={4}>
@@ -77,11 +81,7 @@ const FooterPage = () => {
               </Box>
             </Stack>
             <Stack
-              direction="row"
-              justifyContent="start"
-              alignItems="center"
-              spacing={3}
-            >
+              direction="row" spacing={3} justifyContent={isMobile ? "center": "start"} pt={1}>
               <Image src={facebook} alt="facebook" height={30} width={30} />
               <Image src={instagram} alt="instagram" height={30} width={30} />
               <Image src={linkedin} alt="linkedin" height={30} width={30} />

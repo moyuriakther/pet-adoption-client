@@ -3,6 +3,7 @@ import PetCardContainer from "@/components/Home/Cards/PetCardContainer";
 import HeroSection from "@/components/Home/HeroSection/HeroSection";
 import PetTakingCare from "@/components/Home/PetTakingCare/PetTakingCare";
 import PetAdoptionProcess from "@/components/Home/Process/PetAdoptionProcess";
+import Testimonial from "@/components/Home/Testimonial/Testimonial";
 
 const HomePage = () => {
   return (
@@ -13,6 +14,7 @@ const HomePage = () => {
       <PetAdoptionProcess/>
       <PetTakingCare/>
       <PetCardContainer />
+      <Testimonial/>
     </>
   );
 };

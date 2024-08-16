@@ -23,10 +23,40 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import Link from "next/link"
 import { useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { keyframes, styled } from "@mui/material/styles";
+
+// Keyframe animations
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const slideIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+// Styled components for animation
+const AnimatedBox = styled(Box)(({ theme }) => ({
+  animation: `${fadeIn} 2s ease-in`,
+}));
+
+const AnimatedCard = styled(Card)(({ theme }) => ({
+  animation: `${slideIn} 1s ease-out`,
+}));
 
 const PetCardContainer = () => {
   const theme = useTheme();
@@ -78,7 +108,7 @@ const PetCardContainer = () => {
                         color={"primary.main"}>Featured Pets
             </Typography>
           </Stack>
-        <Box
+        <AnimatedBox
           sx={{
             display: "flex",
             padding: 2,
@@ -120,7 +150,7 @@ const PetCardContainer = () => {
               </Grid>
             </Grid>
           </PAForm>
-        </Box>
+        </AnimatedBox>
       </Container>
       <Grid
         container
@@ -132,7 +162,7 @@ const PetCardContainer = () => {
           alignItems: isMobileOrTablet ? "center" : "",
         }}
       >
-        <Grid item xs={2} md={2}>
+        <Grid item xs={12} sm={6} md={3}>
           <FormControl
             sx={{
               m: 1,
@@ -181,14 +211,14 @@ const PetCardContainer = () => {
             </Select>
           </FormControl>
         </Grid>
-        <Grid item xs={10} md={10}>
+        <Grid item xs={12} sm={6} md={9}>
           <Box sx={{ textAlign: "center", margin: "30px auto" }}>
             <Grid container spacing={2} mb={4}>
               {isLoading
                 ? "Loading.."
                 : data?.map((pet: any) => (
                     <Grid item xs={12} sm={6} md={4} key={pet.id}>
-                      <Card sx={{ maxWidth: 345, padding: 2 }}>
+                      <AnimatedCard sx={{ maxWidth: 345, padding: 2 }}>
                         <CardMedia
                           sx={{ height: 140, borderRadius: 5 }}
                           image={pet?.photos[0]}
@@ -216,7 +246,7 @@ const PetCardContainer = () => {
                             <Button size="small">Details</Button>
                           </Link>
                         </CardActions>
-                      </Card>
+                      </AnimatedCard>
                     </Grid>
                   ))}
             </Grid>

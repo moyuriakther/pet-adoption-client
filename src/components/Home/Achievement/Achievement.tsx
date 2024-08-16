@@ -10,18 +10,69 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-import { styled } from '@mui/material/styles';
+import {  keyframes } from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
 import Image from "next/image";
 import achievement from "@/assets/images/achievements.jpg"
+import { styled } from "@mui/system";
 
-const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
+// Keyframe animations
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+`;
+
+const slideInLeft = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+
+const slideInRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
+// Background animation keyframes
+const backgroundAnimation = keyframes`
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+`;
+
+const AnimatedBackgroundBox = styled(Box)(({ theme }) => ({
+  background: 'linear-gradient(-45deg, #EE9209, #F1F1F1, #EE9209)',
+  backgroundSize: '400% 400%',
+  animation: `${backgroundAnimation} 10s ease infinite`,
+}));
+
+// const Item = styled(Paper)(({ theme }) => ({
+//     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+//     ...theme.typography.body2,
+//     padding: theme.spacing(1),
+//     textAlign: 'center',
+//     color: theme.palette.text.secondary,
+//   }));
 
 
 export default function Achievement() {
@@ -30,20 +81,36 @@ export default function Achievement() {
     const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Box sx={{ bgcolor: "background.paper", pb:8}}>
+    <AnimatedBackgroundBox  sx={{ py:8}}>
       <Container maxWidth="lg">
         <Grid container spacing={2} alignItems="center" justifyContent="center">
-        <Grid item xs={12} md={6}>
-            <Box sx={{ width: 500, height: 450, position: "relative", }}>
-              <Image src={achievement} alt="banner" layout="responsive" style={{ borderRadius: "5%" }}/>
+        <Grid item xs={12} md={6}  sx={{ 
+              animation: `${slideInLeft} 1s ease-out`,
+              position: "relative",
+              display: 'flex',
+              justifyContent: isMobile ? "center" : "flex-start",
+            }}>
+            <Box sx={{ 
+                width: isMobile ? "100%" : 500, 
+                height: isMobile ? 300 : 450, 
+                position: "relative" 
+              }}>
+              <Image src={achievement} alt="banner" layout="responsive" style={{ 
+                  borderRadius: "5%", 
+                  animation: `${fadeIn} 2s ease-in` 
+                }}/>
             </Box>
           </Grid>
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={6} sx={{ 
+              animation: `${slideInRight} 1s ease-out`,
+              textAlign: isMobile ? "center" : "left",
+            }}>
             <Stack direction="column" spacing={2}>
               <Typography
                 variant="h6"
                 component="p"
                 fontWeight={300}
+                sx={{ animation: `${fadeIn} 1s ease-in` }}
               >
                ACHIEVEMENTS
               </Typography>
@@ -52,27 +119,29 @@ export default function Achievement() {
                 component="h2"
                 fontWeight={600}
                 color="primary.main"
+                sx={{ animation: `${fadeIn} 1.5s ease-in` }}
               >
                A LOT OF ANIMALS NEED OUR PROTECTION
               </Typography>
-              {/* <Box sx={{ display: { xs: "none", sm: "none", md: "block" } }}> */}
+           
               {isMobile ? (
-                "There are likely hundreds of adoptable cats"
+               <Typography
+               variant="body2"
+               sx={{ animation: `${fadeIn} 2s ease-in` }}
+             >
+               There are likely hundreds of adoptable cats
+             </Typography>
               ) : (
-                <Typography variant="body1" my={4}>
-                  Our platform has assisted in matching lots of pets with their new families, ensuring each animal finds a loving home. With an intuitive design and user-friendly features, we've attracted a growing community of pet lovers and adopters.
+                <Typography variant="body1" my={4} sx={{ animation: `${fadeIn} 2s ease-in` }}>
+                {`  Our platform has assisted in matching lots of pets with their new families, ensuring each animal finds a loving home. With an intuitive design and user-friendly features, we've attracted a growing community of pet lovers and adopters.`}
                 </Typography>
               )}
-              {/* </Box> */}
-              <Typography
-                variant={isMobile ? "body2" : isTablet ? "body1" : "h6"}
-                my={4}
-              ></Typography>
               <Box
                 sx={{
                   display: "flex",
                   gap: 2,
                   flexDirection: isMobile ? "column" : "row",
+                  justifyContent: isMobile ? "center" : "flex-start",
                 }}
               >
             <Stack
@@ -81,6 +150,7 @@ export default function Achievement() {
                 alignItems="center"
                 divider={<Divider orientation="vertical" flexItem />}
                 spacing={2}
+                sx={{ animation: `${fadeIn} 2.5s ease-in` }}
             >
             <Stack
                 direction="column"
@@ -115,10 +185,9 @@ export default function Achievement() {
             </Stack>
               </Box>
             </Stack>
-          </Grid>
-         
+          </Grid>      
         </Grid>
       </Container>
-    </Box>
+    </AnimatedBackgroundBox>
   )
 }
