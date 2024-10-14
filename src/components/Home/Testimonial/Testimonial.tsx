@@ -1,120 +1,94 @@
-"use client"
-import { Avatar, Box, Container, Stack, Typography } from "@mui/material";
-import testimodal1 from "@/assets/images/t1.jpg";
-import testimodal2 from "@/assets/images/t2.jpg";
-import testimodal3 from "@/assets/images/t3.jpg";
+"use client";
+import { Avatar,Rating, Box, Container, Stack, Typography, useTheme, useMediaQuery, keyframes } from "@mui/material";
+import "swiper/swiper-bundle.css";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper-bundle.css';
-import { Autoplay, Navigation } from "swiper/modules";
-import { keyframes } from "@mui/system"; 
+import 'swiper/css';
+import Image from "next/image";
 
-// Keyframe animations
+
+const reviews = [
+  {
+    id: 1,
+    name: 'Suel Mari',
+    role: 'SEO Expert',
+    rating: 5,
+    message:
+      "The tool X has really automated some of our company’s processes. We now spend less time doing manual work. It’s making our work very easy for us.",
+    avatar: 'https://randomuser.me/api/portraits/men/32.jpg', // Example avatar
+  },
+  {
+    id: 2,
+    name: 'John Doe',
+    role: 'Product Manager',
+    rating: 4,
+    message:
+      "This product has saved us countless hours of work. Highly recommend it!",
+    avatar: 'https://randomuser.me/api/portraits/men/33.jpg',
+  },
+  // Add more reviews as needed
+];
 const fadeInUp = keyframes`
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translate3d(0, 100%, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate3d(0, 0, 0);
   }
 `;
 
-const testimonials = [
-  {
-    name: "Emily Johnson",
-    image: testimodal1.src,
-    feedback: "Adopting my cat through this platform was a seamless experience. The site is user-friendly, and the support team was very helpful.",
-  },
-  {
-    name: "Caily Jeffer",
-    image: testimodal2.src,
-    feedback: "This website made it so easy to find my new best friend! The detailed profiles helped me choose the perfect pet.",
-  },
-  {
-    name: "John Smith",
-    image: testimodal3.src,
-    feedback: "I loved how straightforward the adoption process was. I would highly recommend this site to anyone looking to adopt.",
-  },
-];
-
 export default function Testimonial() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
-    <div style={{ backgroundColor: "#F1F1F1", paddingTop: "90px 10px" }}>
-      <Box sx={{  py: 8 }}>
-        <Container maxWidth="md">
-          <Stack direction="column" spacing={2} mb={4}>
-            <Typography
-              textAlign="center"
-              variant="h6"
-              component="p"
-              fontWeight={300}
-              sx={{ animation: `${fadeInUp} 1s ease-out` }} 
-            >
-              - TESTIMONIALS
-            </Typography>
-            <Typography
-              textAlign="center"
-              variant="h4"
-              component="h2"
-              fontWeight={600}
-              color={"primary.main"}
-              sx={{ animation: `${fadeInUp} 1s ease-out`, animationDelay: "0.5s", animationFillMode: "backwards" }}
-            >
-              WHAT PEOPLE SAY ABOUT US
-            </Typography>
-          </Stack>
-         <Box>
-         <Swiper   spaceBetween={50}
-            slidesPerView={1}
-            loop={true}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            // pagination={{ clickable: true }}
-            navigation={true}
-            modules={[Autoplay, Navigation]}>
-            {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={index}>
-                <Box    sx={{
-                    textAlign: "center",  
-                    px: 2,
-                    py: 4,
-                    backgroundColor: "#fff",
-                    borderRadius: "10px",
-                    boxShadow: "0px 4px 20px rgba(0, 0, 0, 0.1)",
-                    border: `2px solid #EE9209`,
-                    animation: `${fadeInUp} 1s ease-out`, // Animating each card
-                    animationDelay: `${index * 0.3}s`, // Staggered animation for each slide
-                    animationFillMode: "backwards",
-                  }}>
-                  <Avatar
-                    alt={testimonial.name}
-                    src={testimonial.image}
-                    sx={{
-                        width: 80,
-                        height: 80,
-                        mx: "auto",
-                        mb: 2,
-                        animation: `${fadeInUp} 1s ease-out`, // Animating avatar
-                        animationDelay: `${index * 0.3 + 0.5}s`, // Delayed animation for the avatar
-                        animationFillMode: "backwards",
-                      }}
-                  />
-                  <Typography variant="h6" component="h3" gutterBottom   sx={{ animation: `${fadeInUp} 1s ease-out`, animationDelay: `${index * 0.3 + 0.7}s`, animationFillMode: "backwards" }}>
-                    {testimonial.name}
-                  </Typography>
-                  <Typography variant="body2" color="textSecondary"  sx={{ animation: `${fadeInUp} 1s ease-out`, animationDelay: `${index * 0.3 + 0.9}s`, animationFillMode: "backwards" }}>
-                    {testimonial.feedback}
-                  </Typography>
-                </Box>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-         </Box>
-        </Container>
+  <Container maxWidth="lg">
+    <Box className="mx-auto bg-white rounded-lg shadow-lg mb-16 p-16 border-5"   sx={{
+    border: '1px solid', 
+    borderColor: theme => theme.palette.primary.main,
+    animation: `${fadeInUp} 1s ease-out`,
+    animationFillMode: "forwards",
+  }}>
+     <Box className="flex flex-col items-center mb-6">
+       <Box className="flex flex-col items-start">
+          <h4 className="text-green-600 text-sm font-semibold mb-2">Customer Reviews</h4>
+          <Typography  variant={isMobile ? "h5" : "h4"}
+                component="h2"
+                fontWeight={600} color={"primary.main"}>
+              Our Happy Customers
+          </Typography>
+       </Box>
       </Box>
-    </div>
+      <Swiper spaceBetween={30} slidesPerView={1}>
+        {reviews.map((review) => (
+          <SwiperSlide key={review.id}>
+            <Box className="flex items-start" 
+            sx={{
+              animation: `${fadeInUp} 1s ease-out`,
+              animationDelay: "0.5s",
+              animationFillMode: "forwards",
+            }}
+            >
+              <Image
+              alt="review slider img"
+                src={review.avatar}
+                width = "80"
+                height = "80"
+                style={{ borderRadius: "50%" }}
+                className="mr-4"
+              />
+              <Box className="flex flex-col">
+                <Rating value={review.rating} readOnly className="mb-2" />
+                <p className="text-lg text-gray-700 italic mb-2">“{review.message}”</p>
+                <h3 className="font-semibold">{review.name}</h3>
+                <p className="text-sm text-gray-500">{review.role}</p>
+              </Box>
+            </Box>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </Box>
+  </Container>
   );
-}
+};
