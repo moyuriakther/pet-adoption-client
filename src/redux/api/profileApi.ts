@@ -20,7 +20,7 @@ const profileApi = baseApi.injectEndpoints({
     }),
     updateUserStatus: build.mutation({
       query: ({ id, body }) => (
-        console.log(body, IDBCursorWithValue),
+        // console.log(body, IDBCursorWithValue),
         {
           url: `/users/status/${id}`,
           method: "PUT",
@@ -39,7 +39,7 @@ const profileApi = baseApi.injectEndpoints({
     }),
     updateMyProfile: build.mutation({
       query: (body) => (
-        console.log(body),
+        // console.log(body),
         {
           url: `/profile`,
           method: "PUT",

@@ -8,8 +8,6 @@ import moment from "moment";
 import Link from "next/link";
 
 export default function MyAdoptedCard({ pet }: any) {
-  // console.log(pet);
-  // console.log(pet?.pet?.photos[0]);
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardMedia

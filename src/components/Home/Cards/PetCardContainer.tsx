@@ -86,7 +86,6 @@ const PetCardContainer = () => {
 
   const handleChange = (event: SelectChangeEvent) => {
     setSize(event.target.value);
-    // setSearchParams({ size: size || "" });
   };
   const handleGenderChange = (event: SelectChangeEvent) => {
     setGender(event.target.value);
@@ -94,7 +93,7 @@ const PetCardContainer = () => {
   };
 
   return (
-    <Box sx={{mt:8}}>
+    <Box sx={{my:8}}>
       <Container>
         <Stack direction="column" spacing={2} mb={4}>
             <Typography textAlign="center" variant="h6"
@@ -144,26 +143,8 @@ const PetCardContainer = () => {
                 />
               </Grid>
               <Grid item xs={12} md>
-                <Button type="submit" fullWidth>
-                  Search
-                </Button>
-              </Grid>
-            </Grid>
-          </PAForm>
-        </AnimatedBox>
-      </Container>
-      <Grid
-        container
-        spacing={2}
-        mt={2}
-        sx={{
-          flexDirection: isMobileOrTablet ? "column" : "row",
-          justifyContent: isMobileOrTablet ? "center" : "",
-          alignItems: isMobileOrTablet ? "center" : "",
-        }}
-      >
-        <Grid item xs={12} sm={6} md={3}>
-          <FormControl
+              <FormControl
+          size="small"
             sx={{
               m: 1,
               p: 1,
@@ -187,7 +168,10 @@ const PetCardContainer = () => {
               <MenuItem value={"large"}>large</MenuItem>
             </Select>
           </FormControl>
+          </Grid>
+          <Grid item xs={12} md>
           <FormControl
+          size="small"
             sx={{
               m: 1,
               p: 1,
@@ -210,23 +194,33 @@ const PetCardContainer = () => {
               <MenuItem value={"female"}>female</MenuItem>
             </Select>
           </FormControl>
-        </Grid>
-        <Grid item xs={12} sm={6} md={9}>
+          </Grid>
+              <Grid item xs={12} md>
+                <Button type="submit" fullWidth>
+                  Search
+                </Button>
+              </Grid>
+            </Grid>
+          </PAForm>    
+        </AnimatedBox>
+      </Container>
+    <Container>
           <Box sx={{ textAlign: "center", margin: "30px auto" }}>
             <Grid container spacing={2} mb={4}>
               {isLoading
                 ? "Loading.."
                 : data?.map((pet: any) => (
                     <Grid item xs={12} sm={6} md={4} key={pet.id}>
-                      <AnimatedCard sx={{ maxWidth: 345, padding: 2 }}>
+                      <Card sx={{ maxWidth: 345, mx:"auto", mb: 3, boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", borderRadius: 2,}}>
+                      <Link href={`/pet-details/${pet.id}`} passHref>
                         <CardMedia
-                          sx={{ height: 140, borderRadius: 5 }}
+                          sx={{ height: { xs: 180, sm: 220, md: 240 }, objectFit: "cover",}}
                           image={pet?.photos[0]}
                           title={pet?.title}
                         />
-                        <CardContent sx={{ textAlign: "start" }}>
-                          <Typography gutterBottom variant="h5" component="div">
-                            Name: {pet?.name}
+                        <CardContent sx={{ textAlign: "left" }}>
+                          <Typography gutterBottom variant="h6" component="div">
+                          Name: {pet?.name}
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
                             Age: {pet?.age}
@@ -235,24 +229,21 @@ const PetCardContainer = () => {
                             Breed: {pet?.breed}
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
-                            Location: {pet?.location}
+                          Species: {pet?.species}
                           </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            Description: {pet?.description}
-                          </Typography>
-                        </CardContent>
-                        <CardActions>
+                        </CardContent> 
+                        <CardActions sx={{p:2}}>
                           <Link href={`/pet-details/${pet.id}`} passHref>
-                            <Button size="small">Details</Button>
+                          <Button size="small">View Details</Button>
                           </Link>
                         </CardActions>
-                      </AnimatedCard>
+                        </Link>
+                      </Card>
                     </Grid>
                   ))}
             </Grid>
           </Box>
-        </Grid>
-      </Grid>
+    </Container>
     </Box>
   );
 };

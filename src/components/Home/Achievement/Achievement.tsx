@@ -66,22 +66,13 @@ const AnimatedBackgroundBox = styled(Box)(({ theme }) => ({
   animation: `${backgroundAnimation} 10s ease infinite`,
 }));
 
-// const Item = styled(Paper)(({ theme }) => ({
-//     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-//     ...theme.typography.body2,
-//     padding: theme.spacing(1),
-//     textAlign: 'center',
-//     color: theme.palette.text.secondary,
-//   }));
-
-
 export default function Achievement() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <AnimatedBackgroundBox  sx={{ py:8}}>
+    <AnimatedBackgroundBox  sx={{ py:4}}>
       <Container maxWidth="lg">
         <Grid container spacing={2} alignItems="center" justifyContent="center">
         <Grid item xs={12} md={6}  sx={{ 

@@ -34,7 +34,7 @@ const AnimatedStack = styled(Stack)(({ theme }) => ({
 export default function PetAdoptionProcess() {
 
   return (
-    <Container sx={{ my: 8 }}>
+    <Container sx={{ my: 4 }}>
       <AnimatedStack direction="column" spacing={2}>
         <Typography textAlign="center" variant="h6" component="p" fontWeight={300}>
           - How We Work

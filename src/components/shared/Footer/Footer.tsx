@@ -12,6 +12,8 @@ const FooterPage = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
 
+  
+
   return (
     <Box bgcolor="rgba(238, 146, 9, 1)" py={5}>
       <Container maxWidth="lg">
@@ -73,7 +75,7 @@ const FooterPage = () => {
               spacing={4}
             >
               <Box letterSpacing={4}>
-              <Typography color="#ffffff" variant="h6" component="h6" fontWeight={600}>
+              <Typography color="#ffffff" variant="h6" component="h6" fontWeight={600} id="contact">
                 Contact Us
                 </Typography>
                 <Typography color="#ffffff">Email:akthermoyuri@gmail.com</Typography>
@@ -92,7 +94,7 @@ const FooterPage = () => {
         <hr style={{ border: "1px solid #ddd", margin: "20px 0" }} />
       <Box>
         <Typography variant="body2" align="center" color="#ffffff">
-           © 2022 PET ADOPTION. ALL RIGHTS RESERVED
+           © 2024 PET ADOPTION. ALL RIGHTS RESERVED
         </Typography>
       </Box>
       </Container>

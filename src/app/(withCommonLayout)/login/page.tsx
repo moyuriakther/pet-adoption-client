@@ -7,7 +7,7 @@ import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -16,7 +16,16 @@ import { loginValidationSchema } from "@/zodValidations/zodValidations";
 
 const LoginPage = () => {
   const router = useRouter();
-  const [error, setError] = useState("");
+  // const searchParams = useSearchParams();
+  const [error, setError] = useState(""); 
+  // const redirect = searchParams.get("redirect") || "/";
+  const [redirect, setRedirect] = useState("/");
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const redirectParam = searchParams.get("redirect") || "/";
+    setRedirect(redirectParam);
+  }, []);
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     try {
@@ -24,7 +33,7 @@ const LoginPage = () => {
       if (res?.data?.accessToken) {
         storeUserInfo({ accessToken: res?.data?.accessToken });
         toast.success(res.message);
-        router.push("/");
+        router.replace(redirect);
       } else {
         setError(res?.message);
       }

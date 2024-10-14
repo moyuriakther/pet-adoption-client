@@ -21,7 +21,7 @@ interface User {
   role: string;
 }
 
-const UserManagementPage = () => {
+const PetManagementPage = () => {
   const { data, isLoading } = useGetAllPetsQuery({});
   const [softDeletePet, { isSuccess, isError }] = useSoftDeletePetMutation();
 
@@ -93,4 +93,4 @@ const UserManagementPage = () => {
   );
 };
 
-export default UserManagementPage;
+export default PetManagementPage;

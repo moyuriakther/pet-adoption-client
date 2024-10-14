@@ -103,19 +103,12 @@ export default function DashboardDrawer({
                 Hey,
                 {isLoading ? "Loading.." : data?.name}
               </Typography>
-              <Typography
-                variant="h6"
-                noWrap
-                component="div"
-                color="primary.main"
-              >
-                Welcome to dashboard
-              </Typography>
             </Box>
             <Stack direction="row" gap={2}>
               {" "}
               <Link href="/">
-                <Button>Back To Home</Button>
+                <Button  sx={{
+            p: { xs: 1, sm: 1 },}}>Back To Home</Button>
               </Link>
               {userInfo?.email && (
                 <Button
@@ -123,6 +116,7 @@ export default function DashboardDrawer({
                   sx={{
                     backgroundColor: "primary.main",
                     color: "info.dark",
+                    p: { xs: 1, sm: 1 },
                   }}
                 >
                   Sign Out
@@ -137,14 +131,13 @@ export default function DashboardDrawer({
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
         <Drawer
           variant="temporary"
           open={mobileOpen}
           onTransitionEnd={handleDrawerTransitionEnd}
           onClose={handleDrawerClose}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true, 
           }}
           sx={{
             display: { xs: "block", sm: "none" },

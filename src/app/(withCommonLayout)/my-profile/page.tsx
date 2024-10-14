@@ -16,7 +16,6 @@ const Profile = () => {
 
   const { data, isLoading } = useGetMyProfileQuery(undefined);
   const { data: myAdoptedPets } = useMyAdoptedPetsQuery(undefined);
-  // console.log({ myAdoptedPets });
   if (isLoading) {
     <p>Loading...</p>;
   }

@@ -57,10 +57,7 @@ const ProfileInformation = ({ data, isLoading }: any) => {
     setSelectedRequest(null);
   };
 
-  // console.log(allAdoptionRequests);
-
   const handleUpdateAdoption = async (status: any) => {
-    // console.log({ status }, selectedRequest);
     if (selectedRequest) {
       await updateAdoptionRequest({ id: selectedRequest, body: { status } });
       handleCloseMenu();
@@ -175,7 +172,7 @@ const ProfileInformation = ({ data, isLoading }: any) => {
           <Typography>{data?.phoneNumber}</Typography>
         </StyledInformationBox>
       </Stack>
-      {userInfo?.role === USER_ROLE.USER ? (
+      {/* {userInfo?.role === USER_ROLE.USER ? (
         <Box sx={{ my: 3 }}>
           <Typography variant="h5" color="primary.main">
             My Adopted Pets
@@ -223,7 +220,7 @@ const ProfileInformation = ({ data, isLoading }: any) => {
             </MenuItem>
           </Menu>
         </Box>
-      )}
+      )} */}
     </>
   );
 };

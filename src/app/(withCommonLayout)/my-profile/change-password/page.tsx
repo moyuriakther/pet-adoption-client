@@ -22,7 +22,6 @@ const ChangePassword = () => {
   const [error, setError] = useState("");
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     try {
       const res = await changePassword({
         oldPassword: data.oldPassword,
@@ -30,10 +29,8 @@ const ChangePassword = () => {
       });
       toast.success(res?.data?.message);
       logoutUser(router);
-      console.log({ res });
     } catch (err: any) {
       toast.success("Incorrect Old Password");
-      console.log(error);
     }
   };
   return (

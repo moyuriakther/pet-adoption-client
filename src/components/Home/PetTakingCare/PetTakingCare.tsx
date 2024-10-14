@@ -28,7 +28,7 @@ const slideUp = keyframes`
 // Styled Box for animated background
 const AnimatedBox = styled(Box)(({ theme }) => ({
   backgroundColor: "#F1F1F1",
-  padding: theme.spacing(12, 2),
+  padding: theme.spacing(4, 2),
   animation: `${fadeIn} 2s ease-in`
 }));
 
@@ -49,9 +49,9 @@ export default function PetTakingCare() {
           Taking Care of Pets
         </Typography>
       </Stack>
-      <Stack sx={{ alignItems: "center", justifyContent: "center", pt: 4 }}>
-        <Stack sx={{ width: "90%", maxWidth: 850, height: "auto", position: "relative" }}>
-          <Image src={services} alt="Taking care of pets" layout="responsive" style={{ borderRadius: "10px" }} />
+      <Stack sx={{ alignItems: "center", justifyContent: "center", pt: 2 }}>
+        <Stack sx={{ width: "80%", maxWidth: 850, height: "auto", position: "relative" }}>
+          <Image src={services} height={300} alt="Taking care of pets" layout="responsive" style={{ borderRadius: "10px", objectFit: "cover",}} />
         </Stack>
       </Stack>
     </AnimatedBox>

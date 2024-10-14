@@ -24,7 +24,7 @@ const AdoptionRequestModal = ({ open, setOpen, petId }: IProps) => {
     phoneNumber: data?.phoneNumber || "",
   };
 
-  console.log(data);
+
   const handleSubmit = async (values: FieldValues) => {
     values.petId = petId;
     try {
@@ -33,7 +33,7 @@ const AdoptionRequestModal = ({ open, setOpen, petId }: IProps) => {
         toast.success("Adoption Request Done Successfully");
         setOpen(false);
       }
-      console.log(res);
+
     } catch (error) {
       console.log(error);
     }

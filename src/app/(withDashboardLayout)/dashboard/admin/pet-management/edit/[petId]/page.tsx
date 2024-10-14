@@ -33,7 +33,7 @@ const EditPetPage = ({ params }: any) => {
   const handleSubmit = async (values: FieldValues) => {
     // values.id = id;
     values.age = Number(values.age);
-    console.log(values);
+    // console.log(values);
     values.photos = [values.photos];
     try {
       const res = await updatePet({ id: petId, body: values }).unwrap();

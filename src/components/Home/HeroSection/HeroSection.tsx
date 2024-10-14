@@ -26,7 +26,7 @@ const fadeInUp = keyframes`
   }
 `;
 
-const HeroSection = () => {
+const HeroSection = ({ onAdoptNowClick, onContactUsClick }:any) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const isTablet = useMediaQuery(theme.breakpoints.down("md"));
@@ -88,10 +88,10 @@ const HeroSection = () => {
                   animationFillMode: "backwards",
                 }}
               >
-                <Button variant="contained" fullWidth={isMobile}>
+                <Button variant="contained" fullWidth={isMobile} onClick={onAdoptNowClick}>
                   Adopt Now
                 </Button>
-                <Button variant="outlined" fullWidth={isMobile}>
+                <Button variant="outlined" fullWidth={isMobile} onClick={onContactUsClick}>
                   Contact Us
                 </Button>
               </Box>

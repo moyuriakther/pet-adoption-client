@@ -90,14 +90,18 @@ const Navbar = () => {
                               <AccountMenu />
                               <Button
                                 onClick={handleLogOut}
+                                  component={Link}
+                                  href="/"
                                 sx={{
                                   backgroundColor: "info.light",
                                   color: "info.dark",
                                   width: '100%',
                                   borderRadius: 1,
+                                  lineHeight: 1,
+                                 
                                 }}
                               >
-                                Sign Out
+                                Logout
                               </Button>
                             </>
                           ) : (
@@ -110,6 +114,7 @@ const Navbar = () => {
                                   color: "info.dark",
                                   width: '100%',
                                   borderRadius: 1,
+                                  
                                 }}
                                 onClick={toggleMenu}
                               >
@@ -135,7 +140,7 @@ const Navbar = () => {
                     )}
                   </>
                 ) : (
-                  <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2}  sx={{ width: '100%' }}>
+                  <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2} sx={{ width: '100%' }}>
                     <Stack spacing={2} direction={{ xs: "column", sm: "row" }}>
                       <Typography component={Link} href="/" sx={{ color: "text.primary", textDecoration: 'none', "&:hover": { textDecoration: 'underline' } }}>
                         Home
@@ -160,12 +165,17 @@ const Navbar = () => {
                           <AccountMenu />
                           <Button
                             onClick={handleLogOut}
+                            component={Link}
+                            href="/"
                             sx={{
-                              backgroundColor: "info.light",
+                              backgroundColor: "primary.main",
                               color: "info.dark",
+                              width: '100%',
+                              borderRadius: 1,
+                              lineHeight: 1,
                             }}
                           >
-                            Sign Out
+                                Logout
                           </Button>
                         </>
                       ) : (

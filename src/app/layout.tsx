@@ -24,7 +24,7 @@ export default function RootLayout({
         <AppRouterCacheProvider>
           <body className={inter.className}>
             <>
-              <Toaster richColors position="top-center" />
+              <Toaster richColors position="bottom-right" />
               {children}
             </>
           </body>

@@ -17,6 +17,11 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: DashboardIcon,
         },
         {
+          title: "Adoption Requests",
+          path: `${role}/adoption-request`,
+          icon: GroupIcon,
+        },
+        {
           title: "User Management",
           path: `${role}/user-management`,
           icon: GroupIcon,
