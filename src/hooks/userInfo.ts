@@ -7,7 +7,6 @@ import { authKey } from "@/constants/authKey";
 const useUserInfo = (): any | string => {
   const [userInfo, setUserInfo] = useState<any | string>("");
   const authToken = getFromLocalStorage(authKey);
-
   useEffect(() => {
     const fetchUserInfo = () => {
       if (authToken) {

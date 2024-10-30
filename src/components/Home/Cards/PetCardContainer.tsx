@@ -218,21 +218,21 @@ const PetCardContainer = () => {
                           image={pet?.photos[0]}
                           title={pet?.title}
                         />
-                        <CardContent sx={{ textAlign: "left" }}>
+                        <CardContent sx={{ textAlign: "center" }}>
                           <Typography gutterBottom variant="h6" component="div">
-                          Name: {pet?.name}
+                          <span className="font-bold">Name: </span>{pet?.name}
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
-                            Age: {pet?.age}
+                          <span className="font-bold">Age: </span> {pet?.age}
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
-                            Breed: {pet?.breed}
+                          <span className="font-bold"> Breed: </span> {pet?.breed}
                           </Typography>
                           <Typography variant="body2" color="text.secondary">
-                          Species: {pet?.species}
+                          <span className="font-bold">Species: </span> {pet?.species}
                           </Typography>
                         </CardContent> 
-                        <CardActions sx={{p:2}}>
+                        <CardActions sx={{p:2}} className="flex justify-center">
                           <Link href={`/pet-details/${pet.id}`} passHref>
                           <Button size="small">View Details</Button>
                           </Link>

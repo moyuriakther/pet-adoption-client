@@ -15,7 +15,7 @@ const FooterPage = () => {
   
 
   return (
-    <Box bgcolor="rgba(238, 146, 9, 1)" py={5}>
+    <Box bgcolor="rgba(103,84,68,255)" py={5}>
       <Container maxWidth="lg">
         <Grid
           container
@@ -82,13 +82,13 @@ const FooterPage = () => {
                 <Typography color="#ffffff">Phone:01794844000</Typography>
               </Box>
             </Stack>
-            <Stack
+            {/* <Stack
               direction="row" spacing={3} justifyContent={isMobile ? "center": "start"} pt={1}>
               <Image src={facebook} alt="facebook" height={30} width={30} />
               <Image src={instagram} alt="instagram" height={30} width={30} />
               <Image src={linkedin} alt="linkedin" height={30} width={30} />
               <Image src={twitter} alt="twitter" height={30} width={30} />
-            </Stack>
+            </Stack> */}
           </Grid>
         </Grid>
         <hr style={{ border: "1px solid #ddd", margin: "20px 0" }} />

@@ -15,15 +15,16 @@ import {
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
+import { TAuthUser } from "@/types";
 
 const AdoptionRequestPage = () => {
-  // const userInfo = getUserInfo();
+  const userInfo = getUserInfo() as TAuthUser;
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRequest, setSelectedRequest] = useState(null);
 
   const { data: allAdoptionRequests, isLoading } =
     useGetAllAdoptionRequestQuery(undefined);
-  const adoptionRequest = allAdoptionRequests?.filter((adoption:any) => adoption.status === 'PENDING')
+  const adoptionRequest = allAdoptionRequests?.filter((adoption:any) => adoption.status === 'PENDING').filter((adoption:any) => adoption.user.email === userInfo?.email)
   const [updateAdoptionRequest, { isSuccess }] =
     useUpdateAdoptionRequestMutation();
 
@@ -85,36 +86,19 @@ const AdoptionRequestPage = () => {
         return <Chip label={label} color={color} />;
       },
     },
-    {
-      field: "action",
-      headerName: "Actions",
-      flex: 1,
-      headerAlign: "center",
-      align: "center",
-      renderCell: ({ row }) => {
-        return (
-          <Box>
-            <IconButton
-              aria-label="delete"
-              size="large"
-              onClick={(e) => handleOpenMenu(e, row.id)}
-            >
-              <EditIcon sx={{ color: "primary.main" }} />
-            </IconButton>
-          </Box>
-        );
-      },
-    },
   ];
 
   if (isLoading) {
     return <>Loading...</>;
   }
+  if (adoptionRequest?.length <= 0) {
+    return <>No Request Available</>;
+  }
   return (
     <Box>
       <Box sx={{ my: 3 }}>
         <Typography variant="h4" color="primary.main">
-         All Pets Adoption Request
+          My Adoption Requests
         </Typography>
         {!isLoading ? (
           <Box my={2}>

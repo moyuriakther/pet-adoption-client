@@ -16,14 +16,14 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 
-const AdoptionRequestPage = () => {
+const AdoptionRejectPage = () => {
   // const userInfo = getUserInfo();
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRequest, setSelectedRequest] = useState(null);
 
   const { data: allAdoptionRequests, isLoading } =
     useGetAllAdoptionRequestQuery(undefined);
-  const adoptionRequest = allAdoptionRequests?.filter((adoption:any) => adoption.status === 'PENDING')
+  const adoptionRejects = allAdoptionRequests?.filter((adoption:any) => adoption.status === 'REJECTED')
   const [updateAdoptionRequest, { isSuccess }] =
     useUpdateAdoptionRequestMutation();
 
@@ -114,12 +114,12 @@ const AdoptionRequestPage = () => {
     <Box>
       <Box sx={{ my: 3 }}>
         <Typography variant="h4" color="primary.main">
-         All Pets Adoption Request
+         Rejected Pet Adoptions
         </Typography>
         {!isLoading ? (
           <Box my={2}>
             <DataGrid
-              rows={adoptionRequest || []}
+              rows={adoptionRejects || []}
               columns={columns}
               hideFooterPagination
             />
@@ -147,4 +147,4 @@ const AdoptionRequestPage = () => {
   );
 };
 
-export default AdoptionRequestPage;
+export default AdoptionRejectPage;

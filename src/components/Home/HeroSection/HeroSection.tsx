@@ -35,7 +35,7 @@ const HeroSection = ({ onAdoptNowClick, onContactUsClick }:any) => {
       <Container maxWidth="lg">
         <Grid container spacing={2} alignItems="center" justifyContent="center">
           <Grid item xs={12} md={6}  sx={{
-              animation: `${fadeInUp} 1s ease-out`, // Adding animation to the text container
+              animation: `${fadeInUp} 1s ease-out`,
               animationFillMode: "backwards",
             }}>
             <Stack direction="column" spacing={2}>

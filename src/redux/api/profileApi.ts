@@ -18,6 +18,13 @@ const profileApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.user],
     }),
+    getUser: build.query({
+      query: (id) => ({
+        url: `/users/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.user],
+    }),
     updateUserStatus: build.mutation({
       query: ({ id, body }) => (
         // console.log(body, IDBCursorWithValue),
@@ -54,6 +61,7 @@ const profileApi = baseApi.injectEndpoints({
 
 export const {
   useGetMyProfileQuery,
+  useGetUserQuery,
   useUpdateMyProfileMutation,
   useGetAllUsersQuery,
   useUpdateUserRoleMutation,

@@ -22,6 +22,16 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
           icon: GroupIcon,
         },
         {
+          title: "Success Adoptions",
+          path: `${role}/successful-adoption`,
+          icon: GroupIcon,
+        },
+        {
+          title: "Reject Adoptions",
+          path: `${role}/reject-adoption`,
+          icon: GroupIcon,
+        },
+        {
           title: "User Management",
           path: `${role}/user-management`,
           icon: GroupIcon,
@@ -38,7 +48,23 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         title: "Dashboard",
         path: `${role}`,
         icon: DashboardIcon,
-      });
+      }, 
+      {
+        title: "Adoption Requests",
+        path: `${role}/adoption-request`,
+        icon: GroupIcon,
+      },
+      {
+        title: "Success Adoptions",
+        path: `${role}/successful-adoption`,
+        icon: GroupIcon,
+      },
+      {
+        title: "My Profile",
+        path: `${role}/my-profile`,
+        icon: GroupIcon,
+      },
+    );
       break;
 
     default:

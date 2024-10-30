@@ -2,6 +2,7 @@
 import Achievement from "@/components/Home/Achievement/Achievement";
 import PetCardContainer from "@/components/Home/Cards/PetCardContainer";
 import HeroSection from "@/components/Home/HeroSection/HeroSection";
+import PetsGallery from "@/components/Home/PetsGallery/PetGallery";
 import PetTakingCare from "@/components/Home/PetTakingCare/PetTakingCare";
 import PetAdoptionProcess from "@/components/Home/Process/PetAdoptionProcess";
 import Testimonial from "@/components/Home/Testimonial/Testimonial";
@@ -31,6 +32,7 @@ const HomePage = () => {
          <PetCardContainer />
       </div>
       <Testimonial/>
+      <PetsGallery/>
     </>
   );
 };

@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import logo from "@/assets/images/logo3.png";
+import logo from "@/assets/images/logo2.png";
 import useUserInfo from "@/hooks/userInfo";
 import { logoutUser } from "@/services/actions/logoutUser";
 import { USER_ROLE } from "@/constants/userRoles";
@@ -30,7 +30,6 @@ const Navbar = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const [openMenu, setOpenMenu] = useState(false);
-
   const handleLogOut = () => {
     logoutUser(router);
   };
@@ -40,14 +39,14 @@ const Navbar = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "primary.main" }}>
+    <AppBar position="static" sx={{ bgcolor: "rgba(103,84,68,255)" }}>
       <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Grid container alignItems="center">
             <Grid item xs={6} sm={4}>
               <Box display="flex" alignItems="center">
                 <Link href="/">
-                  <Image src={logo} alt="logo" height={70} width={70} />
+                  <Image src={logo} alt="logo" height={80} width={80} />
                 </Link>
               </Box>
             </Grid>
@@ -63,7 +62,7 @@ const Navbar = () => {
                         position="absolute"
                         top={0}
                         right={0}
-                        bgcolor="background.paper"
+                        // bgcolor="background.paper"
                         width="100%"
                         zIndex={1300} // Ensure the menu is above other elements
                       >
@@ -74,6 +73,17 @@ const Navbar = () => {
                           <Typography component={Link} href="/about-us" onClick={toggleMenu} variant="h6" sx={{ textAlign: 'center', width: '100%' }}>
                             About Us
                           </Typography>
+                          {userInfo?.role === USER_ROLE.USER && (
+                            <Typography
+                              component={Link}
+                                href="/dashboard/user"
+                              // color="white"
+                              onClick={toggleMenu}
+                              variant="h6" sx={{ textAlign: 'center', width: '100%' }}
+                            >
+                             User Dashboard
+                            </Typography>
+                          )}
                           {userInfo?.role === USER_ROLE.ADMIN && (
                             <Typography
                               component={Link}
@@ -95,9 +105,9 @@ const Navbar = () => {
                                 sx={{
                                   backgroundColor: "info.light",
                                   color: "info.dark",
-                                  width: '100%',
-                                  borderRadius: 1,
-                                  lineHeight: 1,
+                                  // width: '100%',
+                                  // borderRadius: 1,
+                                  // lineHeight: 1,
                                  
                                 }}
                               >
@@ -142,18 +152,29 @@ const Navbar = () => {
                 ) : (
                   <Stack direction="row" justifyContent="space-between" alignItems="center" spacing={2} sx={{ width: '100%' }}>
                     <Stack spacing={2} direction={{ xs: "column", sm: "row" }}>
-                      <Typography component={Link} href="/" sx={{ color: "text.primary", textDecoration: 'none', "&:hover": { textDecoration: 'underline' } }}>
+                      <Typography component={Link} href="/" sx={{ color: "white", textDecoration: 'none', "&:hover": { textDecoration: 'underline' } }}>
                         Home
                       </Typography>
-                      <Typography component={Link} href="/about-us" sx={{ color: "text.primary", textDecoration: 'none', "&:hover": { textDecoration: 'underline' } }}>
+                      <Typography component={Link} href="/about-us" sx={{ color: "white", textDecoration: 'none', "&:hover": { textDecoration: 'underline' } }}>
                         About Us
                       </Typography>
+                      {userInfo?.role === USER_ROLE.USER && (
+                            <Typography
+                              component={Link}
+                              href="/dashboard/user"
+                              color="white"
+                              onClick={toggleMenu}
+                              sx={{ color: "white", textDecoration: 'none', "&:hover": { textDecoration: 'underline' } }}
+                            >
+                             User Dashboard
+                            </Typography>
+                          )}
                       {userInfo?.role === USER_ROLE.ADMIN && (
                         <Typography
                           component={Link}
                           href="/dashboard/admin"
                           color="black"
-                          sx={{ color: "text.primary", textDecoration: 'none', "&:hover": { textDecoration: 'underline' } }}
+                          sx={{ color: "white", textDecoration: 'none', "&:hover": { textDecoration: 'underline' } }}
                         >
                           Dashboard
                         </Typography>
@@ -170,9 +191,9 @@ const Navbar = () => {
                             sx={{
                               backgroundColor: "primary.main",
                               color: "info.dark",
-                              width: '100%',
-                              borderRadius: 1,
-                              lineHeight: 1,
+                              // width: '100%',
+                              // borderRadius: 1,
+                              // lineHeight: 1,
                             }}
                           >
                                 Logout
