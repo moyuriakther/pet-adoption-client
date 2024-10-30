@@ -62,7 +62,7 @@ const Navbar = () => {
                         position="absolute"
                         top={0}
                         right={0}
-                        // bgcolor="background.paper"
+                        bgcolor="rgba(103,84,68,255)"
                         width="100%"
                         zIndex={1300} // Ensure the menu is above other elements
                       >

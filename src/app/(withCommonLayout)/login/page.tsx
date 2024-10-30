@@ -55,11 +55,12 @@ const LoginPage = () => {
     <Container maxWidth="md" >
       <Box
         sx={{
-          width: "60%",
-          borderRadius: 5,
-          p: 4,
-          backgroundColor: "rgba(255, 255, 255, 0.8)", 
+          maxWidth: "600px",
+          width: { xs: "100%", sm: "80%", md: "60%" },
           boxShadow: 5,
+          borderRadius: 5,
+          p: { xs: 3, sm: 4 },
+          backgroundColor: "rgba(255, 255, 255, 0.8)", 
         }}
       >
         <Stack sx={{ justifyContent: "center", alignItems: "center" }}>
@@ -89,7 +90,7 @@ const LoginPage = () => {
         <PAForm
           onSubmit={onSubmit}
           resolver={zodResolver(loginValidationSchema as any)}
-          defaultValues={{ email: "admin@gmail.com", password: "admin111" }}
+          defaultValues={{ email: "admin@gmail.com", password: "admin12345" }}
         >
           <Grid container spacing={2} my={2}>
             <Grid item xs={12}>

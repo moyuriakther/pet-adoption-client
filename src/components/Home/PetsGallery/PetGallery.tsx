@@ -6,12 +6,14 @@ const PetsGallery = () => {
   const {data: pets} = useGetAllPetsQuery({})
   return (
     <Container maxWidth="lg" sx={{ my: 5 }}>
-      <Typography variant="h4" align="center" gutterBottom>
+      <Typography variant="h4" align="center" gutterBottom  component="h2"
+                fontWeight={600} color={"primary.main"}>
        Pets Gallery
       </Typography>
       <Grid 
         container
         spacing={4}
+        pt={3}
         sx={{
           animation: 'fade-in 1s ease-in-out',
           '@keyframes fade-in': {

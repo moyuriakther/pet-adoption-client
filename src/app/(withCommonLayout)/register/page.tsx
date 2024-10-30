@@ -9,12 +9,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
+import loginImage from "../../../assets/images/loginBackground.jpg"
 
 const RegistrationPage = () => {
   const router = useRouter();
+  const [error, setError] = useState(""); 
+
 
   const onSubmit = async (values: FieldValues) => {
     try {
@@ -29,44 +32,64 @@ const RegistrationPage = () => {
           storeUserInfo({ accessToken: result?.data?.accessToken });
           router.push("/");
         }
+      }else{
+        setError(res?.message);
       }
     } catch (err: any) {
       console.error(err.message);
     }
   };
   return (
-    <Container>
-      <Stack
-        sx={{
-          height: "100vh",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+    <Box
+      sx={{
+      height: "100vh",
+      width: "100%",
+      backgroundImage: `url(${loginImage.src})`,
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      display: "flex",
+      justifyContent: { xs: "center", md: "flex-start" },
+      alignItems: "center",
+    }}
+    >
+        <Container maxWidth="md">
         <Box
           sx={{
             maxWidth: "600px",
-            width: "100%",
-            // boxShadow: 1,
+            width: { xs: "100%", sm: "80%", md: "60%" },
+            boxShadow: 5,
             borderRadius: 5,
-            p: 4,
-            textAlign: "center",
-            backgroundColor: "background.default",
+            p: { xs: 3, sm: 4 },
+            // textAlign: "center",
+            backgroundColor: "rgba(255, 255, 255, 0.8)", 
           }}
         >
           <Stack sx={{ justifyContent: "center", alignItems: "center " }}>
-            <Box>{/* <Image src={Logo} alt="logo" width={50} /> */}</Box>
-            <Box>
+            {/* <Box> */}
               <Typography variant="body1" fontWeight={600}>
                 Registration With Pet Adoption
               </Typography>
               <Typography variant="h6" component="h6" fontWeight={600}>
                 Registration
               </Typography>
-            </Box>
+            {/* </Box> */}
           </Stack>
 
-          <Box>
+          {error && (
+          <Box sx={{ mt: 2 }}>
+            <Typography
+              sx={{
+                backgroundColor: "red",
+                padding: "5px",
+                borderRadius: "4px",
+                color: "white",
+              }}
+            >
+              {error}
+            </Typography>
+          </Box>
+        )}
+          {/* <Box> */}
             <PAForm
               onSubmit={onSubmit}
               resolver={zodResolver(registerValidationSchema as any)}
@@ -125,10 +148,10 @@ const RegistrationPage = () => {
                 </Link>
               </Typography>
             </PAForm>
-          </Box>
+          {/* </Box> */}
         </Box>
-      </Stack>
     </Container>
+      </Box>
   );
 };
 
