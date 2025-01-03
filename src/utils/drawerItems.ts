@@ -59,11 +59,6 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         path: `${role}/successful-adoption`,
         icon: GroupIcon,
       },
-      {
-        title: "My Profile",
-        path: `${role}/my-profile`,
-        icon: GroupIcon,
-      },
     );
       break;
 

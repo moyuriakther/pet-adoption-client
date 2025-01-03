@@ -26,7 +26,7 @@ const petApi = baseApi.injectEndpoints({
         url: `/pets/${id}`,
         method: "GET",
       }),
-      providesTags: [tagTypes.pet],
+      providesTags: [tagTypes.pet, tagTypes.review],
     }),
     updatePet: build.mutation({
       query: ({ id, body }) => (

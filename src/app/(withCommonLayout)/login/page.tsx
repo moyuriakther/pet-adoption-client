@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginValidationSchema } from "@/zodValidations/zodValidations";
 import loginImage from "../../../assets/images/loginBackground.jpg"
+import PARInput from "@/components/UI/Form/PARInput";
 
 
   const predefinedUsers = [
@@ -118,7 +119,7 @@ const LoginPage = () => {
         >
           <Grid container spacing={2} my={2}>
             <Grid item xs={12}>
-              <PAInput
+              <PARInput
                 name="email"
                 label="Email"
                 type="email"
@@ -128,7 +129,7 @@ const LoginPage = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <PAInput
+              <PARInput
                 name="password"
                 label="Password"
                 type="password"

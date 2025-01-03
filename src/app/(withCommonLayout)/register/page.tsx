@@ -13,15 +13,18 @@ import React, { useState } from "react";
 import { FieldValues } from "react-hook-form";
 import { toast } from "sonner";
 import loginImage from "../../../assets/images/loginBackground.jpg"
+import PARInput from "@/components/UI/Form/PARInput";
 
 const RegistrationPage = () => {
   const router = useRouter();
   const [error, setError] = useState(""); 
 
-
+console.log("mou")
   const onSubmit = async (values: FieldValues) => {
+    console.log(values)
     try {
       const res = await registerUser(values);
+      console.log({res})
       if (res?.data?.id) {
         toast.success(res?.message);
         const result = await userLogin({

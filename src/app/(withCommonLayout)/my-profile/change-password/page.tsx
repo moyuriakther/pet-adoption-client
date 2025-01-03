@@ -88,12 +88,12 @@ const ChangePassword = () => {
             >
               <Grid container spacing={2} my={1}>
                 <Grid item md={12} xs={12}>
-                  <PAInput
-                    name="oldPassword"
-                    label="oldPassword"
-                    type="password"
-                    fullWidth={true}
-                  />
+                <PAInput
+                  name="oldPassword"
+                  label="oldPassword"
+                  type="password"
+                  fullWidth={true}
+                />
                 </Grid>
                 <Grid item md={12} xs={12}>
                   <PAInput

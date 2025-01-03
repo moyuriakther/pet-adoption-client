@@ -11,9 +11,11 @@ import ProfileInformation from "./Component/ProfileInformation";
 import ProfileUpdateModal from "./Component/ProfileUpdateModal";
 import { useMyAdoptedPetsQuery } from "@/redux/api/adoptionApi";
 import Link from "next/link";
+import ChangePassModal from "./Component/ChangePassModal";
 
 const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isChangePassModalOpen, setIsChangePassModalOpen] = useState(false);
 
   const { data, isLoading } = useGetMyProfileQuery(undefined);
   const { data: myAdoptedPets } = useMyAdoptedPetsQuery(undefined);
@@ -24,6 +26,7 @@ const Profile = () => {
   return (
     <>
       <ProfileUpdateModal open={isModalOpen} setOpen={setIsModalOpen} />
+      <ChangePassModal open={isChangePassModalOpen} setOpen={setIsChangePassModalOpen} />
       <Container sx={{ mt: 4 }}>
         <Grid container spacing={4}>
           {
@@ -55,16 +58,16 @@ const Profile = () => {
               >
                 Edit Profile
               </Button>
-              <Link href={`/my-profile/change-password`}>
+              {/* <Link href={`/my-profile/change-password`}> */}
               <Button
                 sx={{ my: 0 }}
                 fullWidth
                 endIcon={<ModeEditIcon />}
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => setIsChangePassModalOpen(true)}
               >
                  Change Password
               </Button>
-            </Link>
+            {/* </Link> */}
           </Stack>
         </Grid>
           }
