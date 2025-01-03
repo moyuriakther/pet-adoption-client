@@ -13,9 +13,25 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { loginValidationSchema } from "@/zodValidations/zodValidations";
 import loginImage from "../../../assets/images/loginBackground.jpg"
 
+
+  const predefinedUsers = [
+  {
+    email: "admin@gmail.com",
+    password: "admin12345",
+    role: "admin",
+  },
+  {
+    email: "mou@gmail.com",
+    password: "user12345",
+    role: "user",
+  },
+];
+
 const LoginPage = () => {
   const router = useRouter();
   const [error, setError] = useState(""); 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // const redirect = searchParams.get("redirect") || "/";
   const [redirect, setRedirect] = useState("/");
 
@@ -25,20 +41,28 @@ const LoginPage = () => {
     setRedirect(redirectParam);
   }, []);
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
+  const onSubmit: SubmitHandler<FieldValues> = async (values) => {
+    const data = { email, password };
     try {
       const res = await userLogin(data);
       if (res?.data?.accessToken) {
         storeUserInfo({ accessToken: res?.data?.accessToken });
-        toast.success(res.message);
+        toast.success(res.message || "Login successful!");
         router.replace(redirect);
       } else {
         setError(res?.message);
       }
     } catch (err: any) {
-      toast.error(err.message);
+      toast.error(err.message || "Something went wrong. Please try again.");
     }
   };
+
+ const handleAutofill = (user: (typeof predefinedUsers)[0]) => {
+    setEmail(user.email);
+    setPassword(user.password);
+  };
+
   return (
     <Box
     sx={{
@@ -90,7 +114,7 @@ const LoginPage = () => {
         <PAForm
           onSubmit={onSubmit}
           resolver={zodResolver(loginValidationSchema as any)}
-          defaultValues={{ email: "admin@gmail.com", password: "admin12345" }}
+          defaultValues={{ email, password }}
         >
           <Grid container spacing={2} my={2}>
             <Grid item xs={12}>
@@ -98,6 +122,8 @@ const LoginPage = () => {
                 name="email"
                 label="Email"
                 type="email"
+                onChange={(e:any) => setEmail(e.target.value)}
+                value={email}
                 fullWidth
               />
             </Grid>
@@ -106,11 +132,36 @@ const LoginPage = () => {
                 name="password"
                 label="Password"
                 type="password"
+                onChange={(e:any) => setPassword(e.target.value)}
+                value={password}
                 fullWidth
               />
             </Grid>
           </Grid>
-
+         <div className="mt-5">
+          <table className="w-full border border-gray-200 bg-gray-50">
+            <thead>
+              <tr className="border-b ">
+                <th className="p-2 border-r">Email</th>
+                <th className="p-2 border-r">Password</th>
+                <th className="p-2">Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              {predefinedUsers?.map((user, index) => (
+                <tr
+                  key={index}
+                  className="cursor-pointer hover:bg-gray-100 text-sm text-center"
+                  onClick={() => handleAutofill(user)}
+                >
+                  <td className="p-2 border-b border-r">{user.email}</td>
+                  <td className="p-2 border-b border-r">{user.password}</td>
+                  <td className="p-2 border-b ">{user.role}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
           <Button
             fullWidth
             sx={{ mt: 2, mb: 1 }}
@@ -127,6 +178,7 @@ const LoginPage = () => {
             </Link>
           </Typography>
         </PAForm>
+        
       </Box>
     </Container>
   </Box>

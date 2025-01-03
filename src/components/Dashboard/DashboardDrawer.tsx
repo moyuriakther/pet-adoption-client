@@ -25,6 +25,7 @@ import useUserInfo from "@/hooks/userInfo";
 import { logoutUser } from "@/services/actions/logoutUser";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import AccountMenu from "@/app/(withCommonLayout)/my-profile/Component/AccountMenu";
 
 const drawerWidth = 240;
 
@@ -99,30 +100,53 @@ export default function DashboardDrawer({
             }}
           >
             <Box>
-              <Typography variant="body2" noWrap component="div" color="gray">
+              <Typography variant="body2" noWrap component="div" color="primary.main">
                 Hey,
                 {isLoading ? "Loading.." : data?.name}
               </Typography>
             </Box>
             <Stack direction="row" gap={2}>
-              {" "}
-              <Link href="/">
-                <Button  sx={{
-            p: { xs: 1, sm: 1 },}}>Back To Home</Button>
-              </Link>
-              {userInfo?.email && (
+              {userInfo.email ? (
+              <>
+                <AccountMenu />
+              </>
+            ) : (
+              <Stack direction="column" spacing={2}>
                 <Button
-                  onClick={handleLogOut}
+                  component={Link}
+                  href="/login"
                   sx={{
-                    backgroundColor: "primary.main",
+                    backgroundColor: "info.light",
                     color: "info.dark",
-                    p: { xs: 1, sm: 1 },
+                    width: '100%',
+                    borderRadius: 1,
+                    
                   }}
+                  // onClick={toggleMenu}
                 >
-                  Sign Out
+                  Sign In
                 </Button>
-              )}
+                <Button
+                  component={Link}
+                  href="/register"
+                  sx={{
+                    backgroundColor: "info.dark",
+                    color: "info.light",
+                    width: '100%',
+                    borderRadius: 1,
+                  }}
+                  // onClick={toggleMenu}
+                >
+                  Sign Up
+                </Button>
+              </Stack>
+            )}
+          {/* <Link href="/">
+            <Button  sx={{
+            p: { xs: 1, sm: 1 },}}>Back To Home</Button>
+          </Link> */}
             </Stack>
+
           </Box>
         </Toolbar>
       </AppBar>

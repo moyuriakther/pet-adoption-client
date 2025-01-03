@@ -98,21 +98,6 @@ const Navbar = () => {
                           {userInfo.email ? (
                             <>
                               <AccountMenu />
-                              <Button
-                                onClick={handleLogOut}
-                                  component={Link}
-                                  href="/"
-                                sx={{
-                                  backgroundColor: "info.light",
-                                  color: "info.dark",
-                                  // width: '100%',
-                                  // borderRadius: 1,
-                                  // lineHeight: 1,
-                                 
-                                }}
-                              >
-                                Logout
-                              </Button>
                             </>
                           ) : (
                             <Stack direction="column" spacing={2}>
@@ -184,20 +169,17 @@ const Navbar = () => {
                       {userInfo.email ? (
                         <>
                           <AccountMenu />
-                          <Button
+                          {/* <Button
                             onClick={handleLogOut}
                             component={Link}
                             href="/"
                             sx={{
                               backgroundColor: "primary.main",
                               color: "info.dark",
-                              // width: '100%',
-                              // borderRadius: 1,
-                              // lineHeight: 1,
                             }}
                           >
                                 Logout
-                          </Button>
+                          </Button> */}
                         </>
                       ) : (
                         <Stack direction={{ xs: "column", sm: "row" }} spacing={2}>

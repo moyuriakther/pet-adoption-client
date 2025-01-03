@@ -1,6 +1,6 @@
 "use client";
 
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button, Container, Stack } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2"; // Grid version 2
 import Image from "next/image";
 import React, { useState } from "react";
@@ -10,6 +10,7 @@ import { useGetMyProfileQuery } from "@/redux/api/profileApi";
 import ProfileInformation from "./Component/ProfileInformation";
 import ProfileUpdateModal from "./Component/ProfileUpdateModal";
 import { useMyAdoptedPetsQuery } from "@/redux/api/adoptionApi";
+import Link from "next/link";
 
 const Profile = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -45,16 +46,27 @@ const Profile = () => {
                   alt="User Photo"
                 />
               </Box>
-
-              <Button
-                sx={{ my: 3 }}
+              <Stack direction="column" spacing={1} mt={2}>
+               <Button
+                sx={{ my: 1 }}
                 fullWidth
                 endIcon={<ModeEditIcon />}
                 onClick={() => setIsModalOpen(true)}
               >
                 Edit Profile
               </Button>
-            </Grid>
+              <Link href={`/my-profile/change-password`}>
+              <Button
+                sx={{ my: 0 }}
+                fullWidth
+                endIcon={<ModeEditIcon />}
+                onClick={() => setIsModalOpen(true)}
+              >
+                 Change Password
+              </Button>
+            </Link>
+          </Stack>
+        </Grid>
           }
           <Grid xs={12} md={8}>
             <ProfileInformation data={data} isLoading={isLoading} />

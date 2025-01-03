@@ -10,6 +10,8 @@ type TInputProps = {
   sx?: SxProps;
   placeholder?: string;
   required?: boolean;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 const PAInput = ({
@@ -21,6 +23,8 @@ const PAInput = ({
   sx,
   placeholder,
   required,
+  value,
+  onChange,
 }: TInputProps) => {
   const { control } = useFormContext();
   return (
@@ -36,6 +40,8 @@ const PAInput = ({
             variant="outlined"
             size={size}
             fullWidth={fullWidth}
+            value={value}
+            onChange={onChange}
             sx={{ ...sx }}
             placeholder={label}
             required={required}

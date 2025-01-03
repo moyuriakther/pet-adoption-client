@@ -3,7 +3,7 @@ import PetCard from './PetCard';
 import { useGetAllPetsQuery } from '@/redux/api/petApi';
 
 const PetsGallery = () => {
-  const {data: pets} = useGetAllPetsQuery({})
+  const {data: pets} = useGetAllPetsQuery({});
   return (
     <Container maxWidth="lg" sx={{ my: 5 }}>
       <Typography variant="h4" align="center" gutterBottom  component="h2"
@@ -23,12 +23,13 @@ const PetsGallery = () => {
         }}
       >
         {pets?.map((pet:any) => (
-          <Grid item xs={12} sm={6} md={4} lg={4} key={pet.id}>
+          <Grid item xs={12} sm={6} md={3} lg={3} key={pet.id}>
             <PetCard pet={pet}/>
           </Grid>
         ))}
       </Grid>
     </Container>
+   
   );
 };
 

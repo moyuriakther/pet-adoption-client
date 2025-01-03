@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const loginValidationSchema = z.object({
   email: z.string({ required_error: "Email is required" }),
-  password: z.string({ required_error: "Password must be 6 character" }).min(6),
+  password: z.string({ required_error: "Password must be 6 character" }),
 });
 
 export const ChangePasswordValidationSchema = z

@@ -210,7 +210,7 @@ const PetCardContainer = () => {
               {isLoading
                 ? "Loading.."
                 : data?.map((pet: any) => (
-                    <Grid item xs={12} sm={6} md={4} key={pet.id}>
+                    <Grid item xs={12} sm={6} md={3} key={pet.id}>
                       <Card sx={{ maxWidth: 345, mx:"auto", mb: 3, boxShadow: "0px 4px 12px rgba(0, 0, 0, 0.1)", borderRadius: 2,}}>
                       <Link href={`/pet-details/${pet.id}`} passHref>
                         <CardMedia
