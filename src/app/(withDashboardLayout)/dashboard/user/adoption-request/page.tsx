@@ -92,7 +92,7 @@ const AdoptionRequestPage = () => {
     return <>Loading...</>;
   }
   if (adoptionRequest?.length <= 0) {
-    return <>No Request Available</>;
+    return <>No Pending Adoption Requests Available</>;
   }
   return (
     <Box>

@@ -16,17 +16,17 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
 import { useState } from "react";
 
-const AdoptionRequestPage = () => {
+const AdoptionRejectPage = () => {
   // const userInfo = getUserInfo();
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedRequest, setSelectedRequest] = useState(null);
 
   const { data: allAdoptionRequests, isLoading } =
     useGetAllAdoptionRequestQuery(undefined);
-  const adoptionRequest = allAdoptionRequests?.filter((adoption:any) => adoption.status === 'PENDING')
+  const adoptionRejects = allAdoptionRequests?.filter((adoption:any) => adoption.status === 'REJECTED')
   const [updateAdoptionRequest, { isSuccess }] =
     useUpdateAdoptionRequestMutation();
-console.log(adoptionRequest)
+
   const handleOpenMenu = (event: any, request: any) => {
     setAnchorEl(event.currentTarget);
     setSelectedRequest(request);
@@ -110,19 +110,19 @@ console.log(adoptionRequest)
   if (isLoading) {
     return <>Loading...</>;
   }
-  if (adoptionRequest?.length <= 0) {
-    return <>No Adoption Requests Available</>;
+    if (adoptionRejects?.length <= 0) {
+    return <>No Rejected Adoption Requests Available</>;
   }
   return (
     <Box>
       <Box sx={{ my: 3 }}>
         <Typography variant="h4" color="primary.main">
-        Adoption Requests
+         Rejected Adoption Requests
         </Typography>
-        {(!isLoading) ? (
+        {!isLoading ? (
           <Box my={2}>
             <DataGrid
-              rows={adoptionRequest || []}
+              rows={adoptionRejects || []}
               columns={columns}
               hideFooterPagination
             />
@@ -150,4 +150,4 @@ console.log(adoptionRequest)
   );
 };
 
-export default AdoptionRequestPage;
+export default AdoptionRejectPage;

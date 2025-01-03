@@ -115,7 +115,7 @@ export default function AccountMenu() {
             My Profile
           </MenuItem>
         </Link>
-          <Link href={`/`}>
+          <Link href={`/login`}>
             <MenuItem onClick={handleLogout}>
               <LogoutIcon sx={{ background: "transparent", color: "primary.main" }}/>
                 Logout

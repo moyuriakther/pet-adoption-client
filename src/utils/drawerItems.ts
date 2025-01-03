@@ -49,14 +49,19 @@ export const drawerItems = (role: UserRole): DrawerItem[] => {
         path: `${role}`,
         icon: DashboardIcon,
       }, 
+       {
+        title: "Success Adoptions",
+        path: `${role}/successful-adoption`,
+        icon: GroupIcon,
+      },
       {
         title: "Adoption Requests",
         path: `${role}/adoption-request`,
         icon: GroupIcon,
       },
       {
-        title: "Success Adoptions",
-        path: `${role}/successful-adoption`,
+        title: "Reject Adoptions",
+        path: `${role}/reject-adoption`,
         icon: GroupIcon,
       },
     );

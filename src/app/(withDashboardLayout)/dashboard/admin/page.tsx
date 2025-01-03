@@ -142,7 +142,7 @@ const adoptionData:ChartData[] = adoptionRequests
             flex: 1,
             width: { xs: '100%', md: '50%' },
           }}>
-              {!adoptionLoading && <PieChart title="Adoption Requests by Status" data={adoptionData} />}
+              {!adoptionLoading && <PieChart title="Adoption Requests" data={adoptionData} />}
         </Box>
       </Box>
       <div className="p-4">
